@@ -15,7 +15,7 @@ export default async function LoginPage() {
       <Mandala className="absolute -right-40 -top-40 size-[30rem] text-teal opacity-20" />
       <div className="relative w-full max-w-md">
         <div className="mb-8 flex justify-center">
-          <Logo href={null} priority />
+          <Logo href={null} priority className="h-24 w-auto" />
         </div>
         <div className="rounded-[var(--radius-card)] border border-line/70 bg-white p-6 shadow-lift sm:p-8">
           <h1 className="text-4xl">Clinic admin</h1>

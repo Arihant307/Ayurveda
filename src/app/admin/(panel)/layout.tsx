@@ -9,8 +9,8 @@ export default async function PanelLayout({ children }: { children: React.ReactN
   const admin = await requireAdminPage();
   const unread = admin.role === "OWNER" ? await db.contactMessage.count({ where: { isRead: false } }) : 0;
   return (
-    <AdminShell admin={{ name: admin.name, role: admin.role }} logo={<Logo href="/admin" className="h-10 w-auto" />}
-      logoOnDark={<Logo href="/admin" variant="onDark" className="h-10 w-auto" />} unreadMessages={unread}>
+    <AdminShell admin={{ name: admin.name, role: admin.role }} logo={<Logo href="/admin" className="h-12 w-auto" />}
+      logoOnDark={<Logo href="/admin" variant="onDark" className="h-16 w-auto" />} unreadMessages={unread}>
       {children}
     </AdminShell>
   );

@@ -47,7 +47,7 @@ export function clinicJsonLd(sessions: { weekday: number; startTime: string; end
     url: siteUrl("/"),
     telephone: `+91${CLINIC.phone}`,
     image: siteUrl("/opengraph-image"),
-    logo: siteUrl("/brand/logo.svg"),
+    logo: siteUrl("/brand/logo.png"),
     priceRange: "₹₹",
     medicalSpecialty: ["Ayurveda", "Panchakarma"],
     address: {

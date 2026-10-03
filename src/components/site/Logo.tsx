@@ -22,7 +22,7 @@ export function Logo({
       width={logo.width}
       height={logo.height}
       priority={priority}
-      className={cn("h-11 w-auto md:h-12", className)}
+      className={cn("h-14 w-auto md:h-16", className)}
     />
   );
   if (!href) return img;

@@ -164,7 +164,7 @@ These need a Chromium for Playwright. Set `CHROMIUM_PATH` to use an installed br
 
 ## 6. Things the clinic should replace or confirm
 
-- **Logo:** the brand image was **not available** while this was built. `public/brand/logo.svg` and `public/brand/logo-on-dark.svg` are clearly labelled *placeholder* wordmarks, and `src/app/icon.svg` is a placeholder favicon. Replace them with the real logo, cut out on a transparent background, plus a white-text variant for navy backgrounds (footer and admin sidebar). Keep the same file names, or edit `src/lib/constants/brand.ts`, and set the real width and height there. Don't redraw or recolour the logo.
+- **Logo:** `public/brand/logo.png` was cut out, on a transparent background, from the clinic's Gandhi Jayanti post artwork. It is about 230 × 140 px, which is sharp at the sizes used on the site. `logo-on-dark.png` is the same cut-out with only the navy lettering turned white, matching the white-text version on the clinic's own dark-background material. The favicon (`src/app/icon.png`, `apple-icon.png`) is the leaf-and-cross mark from the same cut-out. **For best quality, replace these with the original high-resolution logo files** if the designer has them: keep the file names and update the width and height in `src/lib/constants/brand.ts`.
 - **Photos:** everything in `public/images/placeholders/` is a placeholder labelled "PHOTO PLACEHOLDER". Upload doctor and treatment photos in the admin. Replace `clinic.svg`, used on Home and About, with a real photo of the clinic.
 - **Doctor qualifications and experience** are deliberately left empty for the clinic to fill in under Admin → Doctors. The short bios and areas of expertise are neutral drafts; please review them.
 - **Map coordinates** in `src/lib/constants/clinic.ts` (`26.9118, 75.7426`) are an approximation of Amrapali Circle. Confirm them using the clinic's Google Maps pin.
@@ -173,7 +173,7 @@ These need a Chromium for Playwright. Set `CHROMIUM_PATH` to use an installed br
 
 ## 7. Assumptions made
 
-1. **Logo** — no image was received, so placeholders are used (see above).
+1. **Logo** — cut out from the clinic's social-media artwork; no original vector or high-resolution file was available (see above).
 2. **Time zone** — Asia/Kolkata has no daylight saving, so clinic time is converted with a fixed +05:30 offset. Instants are stored in UTC (`timestamptz`); holidays and leave are stored as calendar dates (`DATE`).
 3. **Appointment ID** — `KA-YYMM-XXXX`. `YYMM` is the month the booking was **made** (clinic time). `XXXX` is 4 random characters from an unambiguous alphabet (no 0/O/1/I), and is checked for uniqueness.
 4. **Booking window** — "30 days" means today plus the next 29 days. The minimum lead time defaults to 2 hours. Both can be changed in the admin.

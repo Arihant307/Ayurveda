@@ -18,7 +18,7 @@ export async function Footer() {
       <div className="bg-navy">
         <div className="container-site grid gap-10 pb-10 pt-8 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.3fr] lg:gap-8">
           <div>
-            <Logo variant="onDark" />
+            <Logo variant="onDark" className="h-20 w-auto" />
             <p className="mt-4 max-w-xs text-[0.975rem] leading-relaxed">
               An Ayurveda and Panchakarma clinic in Vaishali Nagar, Jaipur — personalised consultations and classical therapies,
               offered with care and modern clinical standards.
