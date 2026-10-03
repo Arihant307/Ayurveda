@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Brand tokens — the ONLY place colours are defined. Everything else uses the
+   Tailwind utilities generated from @theme below (bg-green, text-navy, …).
+   ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  /* Core brand (from the logo) */
+  --brand-green: #0d4e34;
+  --brand-navy: #061685;
+  --brand-teal: #0dc0b2;
+  --brand-magenta: #e01993;
+  --brand-violet: #5b1bca;
+  --brand-saffron: #f9a95c;
+  --brand-cream: #fcf9f0;
+
+  /* Derived shades (for states and accessible text) */
+  --brand-green-deep: #093b27;
+  --brand-green-soft: #e3eee7;
+  --brand-teal-deep: #08766d;
+  --brand-teal-soft: #dcf5f2;
+  --brand-saffron-soft: #fdf0e1;
+  --brand-cream-deep: #f4eedd;
+  --brand-ink: #1f2a24;
+  --brand-muted: #5b6660;
+  --brand-line: #e7e1d0;
+  --brand-white: #ffffff;
+  --brand-danger: #b42318;
+  --brand-danger-soft: #fdecea;
+  --brand-warning: #8a5300;
+  --brand-warning-soft: #fdf2df;
+  --brand-on-green-muted: #cfe7dc;
+
+  --shadow-soft: 0 1px 2px rgb(13 78 52 / 0.04), 0 8px 24px -8px rgb(13 78 52 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(13 78 52 / 0.06), 0 18px 40px -12px rgb(13 78 52 / 0.2);
+}
+
+@theme inline {
+  /* Reset Tailwind's default palette so only brand colours exist. */
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: var(--brand-white);
+  --color-black: #000;
+
+  --color-green: var(--brand-green);
+  --color-green-deep: var(--brand-green-deep);
+  --color-green-soft: var(--brand-green-soft);
+  --color-navy: var(--brand-navy);
+  --color-teal: var(--brand-teal);
+  --color-teal-deep: var(--brand-teal-deep);
+  --color-teal-soft: var(--brand-teal-soft);
+  --color-magenta: var(--brand-magenta);
+  --color-violet: var(--brand-violet);
+  --color-saffron: var(--brand-saffron);
+  --color-saffron-soft: var(--brand-saffron-soft);
+  --color-cream: var(--brand-cream);
+  --color-cream-deep: var(--brand-cream-deep);
+  --color-ink: var(--brand-ink);
+  --color-muted: var(--brand-muted);
+  --color-line: var(--brand-line);
+  --color-danger: var(--brand-danger);
+  --color-danger-soft: var(--brand-danger-soft);
+  --color-warning: var(--brand-warning);
+  --color-warning-soft: var(--brand-warning-soft);
+  --color-on-green-muted: var(--brand-on-green-muted);
+
+  --font-serif: var(--font-heading), "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-body), var(--font-devanagari), system-ui, sans-serif;
+  --font-deva: var(--font-devanagari), "Noto Sans Devanagari", sans-serif;
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-lift: var(--shadow-lift);
+
+  --radius-card: 1.25rem;
+
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.35s ease-out both;
+  --animate-pop: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-sway: sway 9s ease-in-out infinite alternate;
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pop {
+  0% { opacity: 0; transform: scale(0.6); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes sway {
+  from { transform: rotate(-2deg) translateY(0); }
+  to { transform: rotate(2deg) translateY(-6px); }
+}
+@keyframes draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    background: var(--brand-cream);
+    color: var(--brand-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    color: var(--brand-green);
+    line-height: 1.12;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  /* Cormorant defaults to old-style figures; lining figures read better for times and dates. */
+  h1, h2, h3, h4, .font-serif { font-variant-numeric: lining-nums; }
+  :lang(hi), :lang(sa) { font-family: var(--font-deva); }
+  ::selection { background: var(--brand-teal-soft); color: var(--brand-green-deep); }
+
+  :focus-visible {
+    outline: 3px solid var(--brand-teal-deep);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  button, [role="button"], a { -webkit-tap-highlight-color: transparent; }
+  button:not(:disabled), [role="button"] { cursor: pointer; }
+}
+
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-site { padding-inline: 2rem; }
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brand-teal-deep);
+  }
+
+  .prose-clinic p + p { margin-top: 1rem; }
+  .prose-clinic h2 { font-size: 1.75rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
+  .prose-clinic h3 { font-size: 1.35rem; margin-top: 1.75rem; margin-bottom: 0.5rem; }
+  .prose-clinic ul { list-style: disc; padding-left: 1.25rem; margin-top: 0.75rem; }
+  .prose-clinic li + li { margin-top: 0.35rem; }
+  .prose-clinic a { color: var(--brand-green); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Hover lift used by cards */
+  .lift {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  @media (hover: hover) {
+    .lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+  }
+
+  /* Scroll reveal: content is visible by default; JS adds .reveal-armed to animate. */
+  .reveal-armed [data-reveal] {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal-armed [data-reveal].is-visible { opacity: 1; transform: none; }
+
+  .draw-check {
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: draw 0.6s 0.25s ease-out forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-armed [data-reveal] { opacity: 1; transform: none; }
+  .draw-check { stroke-dashoffset: 0; }
+}

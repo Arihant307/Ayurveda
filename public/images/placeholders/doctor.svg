@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 720" width="600" height="720">
+  <!-- PLACEHOLDER portrait. Upload the doctor's photo from Admin › Doctors. -->
+  <rect width="600" height="720" fill="#E3EEE7"/>
+  <circle cx="480" cy="120" r="160" fill="#0DC0B2" opacity="0.12"/>
+  <circle cx="300" cy="280" r="96" fill="#0D4E34" opacity="0.18"/>
+  <path d="M120 720 C 120 540 200 430 300 430 C 400 430 480 540 480 720 Z" fill="#0D4E34" opacity="0.18"/>
+  <g fill="none" stroke="#0D4E34" stroke-width="3" opacity="0.35" stroke-linecap="round">
+    <path d="M70 640 C 90 560 120 520 170 500"/>
+    <path d="M100 575 C 70 560 60 530 66 500 C 92 515 104 545 100 575 Z"/>
+  </g>
+  <text x="300" y="690" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0D4E34" opacity="0.55" letter-spacing="2">PHOTO PLACEHOLDER</text>
+</svg>

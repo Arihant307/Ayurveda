@@ -1,0 +1,250 @@
+// Kumar Ayurveda — data model.
+// All instants are stored in UTC (timestamptz); clinic-local calendar dates
+// (holidays, leave) are stored as DATE and interpreted in Asia/Kolkata.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AdminRole {
+  OWNER
+  STAFF
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  COMPLETED
+  CANCELLED
+}
+
+enum AppointmentType {
+  FIRST_CONSULTATION
+  FOLLOW_UP
+  PANCHAKARMA
+  THERAPY
+}
+
+enum Gender {
+  FEMALE
+  MALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
+
+model Admin {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String
+  passwordHash String
+  role         AdminRole @default(STAFF)
+  isActive     Boolean   @default(true)
+  lastLoginAt  DateTime? @db.Timestamptz(3)
+  createdAt    DateTime  @default(now()) @db.Timestamptz(3)
+  updatedAt    DateTime  @updatedAt @db.Timestamptz(3)
+
+  logs AppointmentLog[]
+}
+
+/// Failed/successful login attempts, used for rate limiting (works across serverless instances).
+model LoginAttempt {
+  id        String   @id @default(cuid())
+  email     String
+  ip        String
+  success   Boolean
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([email, createdAt])
+  @@index([ip, createdAt])
+}
+
+model Doctor {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  name           String
+  /// Filled in by the clinic, e.g. "BAMS, MD (Ayurveda)". Hidden on the site while empty.
+  qualification  String?
+  specialization String?
+  /// Free text filled in by the clinic, e.g. "12+ years". Hidden on the site while empty.
+  experience     String?
+  bio            String?  @db.Text
+  expertise      String[] @default([])
+  photoUrl       String?
+  displayOrder   Int      @default(0)
+  isActive       Boolean  @default(true)
+  createdAt      DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt      DateTime @updatedAt @db.Timestamptz(3)
+
+  availability DoctorAvailability[]
+  blockedDates BlockedDate[]
+  appointments Appointment[]
+
+  @@index([isActive, displayOrder])
+}
+
+/// One working session on a weekday. Several rows per weekday = several sessions;
+/// gaps between them are breaks. Times are clinic-local "HH:mm".
+model DoctorAvailability {
+  id          String @id @default(cuid())
+  doctorId    String
+  /// 0 = Sunday … 6 = Saturday
+  weekday     Int
+  startTime   String
+  endTime     String
+  slotMinutes Int    @default(30)
+
+  doctor Doctor @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@index([doctorId, weekday])
+}
+
+/// doctorId = null → clinic-wide holiday; otherwise that doctor's leave.
+model BlockedDate {
+  id        String   @id @default(cuid())
+  doctorId  String?
+  date      DateTime @db.Date
+  reason    String?
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  doctor Doctor? @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+
+  @@index([date])
+  @@index([doctorId, date])
+}
+
+model Patient {
+  id        String   @id @default(cuid())
+  phone     String   @unique
+  name      String
+  email     String?
+  age       Int?
+  gender    Gender?
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  appointments Appointment[]
+}
+
+model Appointment {
+  id          String            @id @default(cuid())
+  /// Public reference, format KA-YYMM-XXXX
+  code        String            @unique
+  doctorId    String
+  patientId   String
+  treatmentId String?
+  startsAt    DateTime          @db.Timestamptz(3)
+  endsAt      DateTime          @db.Timestamptz(3)
+  status      AppointmentStatus @default(PENDING)
+  type        AppointmentType
+
+  // Snapshot of the patient's details exactly as entered at booking time.
+  patientName   String
+  patientPhone  String
+  patientEmail  String?
+  patientAge    Int
+  patientGender Gender
+
+  reason       String  @db.Text
+  message      String? @db.Text
+  cancelReason String? @db.Text
+
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+
+  doctor    Doctor           @relation(fields: [doctorId], references: [id])
+  patient   Patient          @relation(fields: [patientId], references: [id])
+  treatment Treatment?       @relation(fields: [treatmentId], references: [id], onDelete: SetNull)
+  logs      AppointmentLog[]
+
+  // NOTE: a partial unique index on (doctorId, startsAt) WHERE status <> 'CANCELLED'
+  // is created in the migration SQL (Prisma cannot express partial indexes).
+  @@index([startsAt])
+  @@index([status])
+  @@index([doctorId])
+  @@index([doctorId, startsAt])
+  @@index([patientPhone])
+}
+
+model AppointmentLog {
+  id            String             @id @default(cuid())
+  appointmentId String
+  action        String
+  fromStatus    AppointmentStatus?
+  toStatus      AppointmentStatus?
+  note          String?            @db.Text
+  adminId       String?
+  createdAt     DateTime           @default(now()) @db.Timestamptz(3)
+
+  appointment Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+  admin       Admin?      @relation(fields: [adminId], references: [id], onDelete: SetNull)
+
+  @@index([appointmentId, createdAt])
+}
+
+model Treatment {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  name             String
+  shortDescription String
+  description      String   @db.Text
+  benefits         String[] @default([])
+  duration         String?
+  imageUrl         String?
+  isFeatured       Boolean  @default(false)
+  isVisible        Boolean  @default(true)
+  displayOrder     Int      @default(0)
+  createdAt        DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt        DateTime @updatedAt @db.Timestamptz(3)
+
+  appointments Appointment[]
+
+  @@index([isVisible, displayOrder])
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  patientName String
+  content     String   @db.Text
+  /// Optional short context, e.g. "Panchakarma patient"
+  context     String?
+  rating      Int?
+  isPublished Boolean  @default(false)
+  createdAt   DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt   DateTime @updatedAt @db.Timestamptz(3)
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  phone     String
+  email     String?
+  subject   String?
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+
+  @@index([isRead, createdAt])
+}
+
+/// Images uploaded from the admin (doctor photos, treatment images).
+/// Stored in Postgres so the app needs no extra storage service.
+model Upload {
+  id        String   @id @default(cuid())
+  mimeType  String
+  data      Bytes
+  size      Int
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+}
+
+/// Single-row table (id = 1).
+model ClinicSettings {
+  id                Int      @id @default(1)
+  bookingWindowDays Int      @default(30)
+  minLeadMinutes    Int      @default(120)
+  updatedAt         DateTime @updatedAt @db.Timestamptz(3)
+}
