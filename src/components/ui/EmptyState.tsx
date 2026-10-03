@@ -17,10 +17,10 @@ export function EmptyState({
 }) {
   return (
     <div className={cn("rounded-[var(--radius-card)] border border-dashed border-line bg-white/60 px-6 py-10 text-center", className)}>
-      <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-green-soft text-green">
+      <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-navy-soft text-navy">
         {icon ?? <Leaf className="size-6" aria-hidden="true" />}
       </div>
-      <p className="font-serif text-xl font-semibold text-green">{title}</p>
+      <p className="font-serif text-xl font-semibold text-navy">{title}</p>
       {children && <div className="mx-auto mt-1 max-w-md text-muted">{children}</div>}
       {action && <div className="mt-5">{action}</div>}
     </div>

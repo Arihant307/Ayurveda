@@ -13,9 +13,9 @@ export async function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto text-on-green-muted">
-      <Wave className="text-green" />
-      <div className="bg-green">
+    <footer className="mt-auto text-on-navy-muted">
+      <Wave className="text-navy" />
+      <div className="bg-navy">
         <div className="container-site grid gap-10 pb-10 pt-8 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.3fr] lg:gap-8">
           <div>
             <Logo variant="onDark" />
@@ -121,7 +121,7 @@ export async function Footer() {
               ))}
             </ul>
           </div>
-          <p className="container-site pb-6 text-xs leading-relaxed text-on-green-muted/90">
+          <p className="container-site pb-6 text-xs leading-relaxed text-on-navy-muted/90">
             Information on this website is for general awareness only and is not a substitute for professional medical advice.
             Ayurvedic therapies are offered to support general wellbeing. Please consult a qualified doctor about any health concern.
           </p>

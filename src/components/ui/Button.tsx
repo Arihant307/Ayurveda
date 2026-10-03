@@ -12,12 +12,12 @@ const base =
   "disabled:opacity-60 disabled:active:scale-100 disabled:cursor-not-allowed";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-green text-white shadow-soft hover:bg-green-deep hover:shadow-lift",
-  secondary: "bg-teal-soft text-green-deep hover:bg-green-soft",
-  outline: "border-2 border-green text-green bg-transparent hover:bg-green hover:text-white",
-  ghost: "text-green hover:bg-green-soft",
+  primary: "bg-navy text-white shadow-soft hover:bg-navy-dark hover:shadow-lift",
+  secondary: "bg-teal text-navy-dark hover:bg-teal-dark hover:text-white",
+  outline: "border-2 border-navy text-navy bg-transparent hover:bg-navy hover:text-white",
+  ghost: "text-navy hover:bg-navy-soft",
   danger: "bg-danger text-white hover:opacity-90",
-  light: "bg-white text-green shadow-soft hover:bg-cream",
+  light: "bg-white text-navy shadow-soft hover:bg-soft",
 };
 
 const sizes: Record<Size, string> = {

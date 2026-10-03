@@ -9,7 +9,7 @@ export function TreatmentCard({ treatment, headingLevel = "h3" }: { treatment: T
   const H = headingLevel;
   return (
     <article data-reveal className="lift group relative flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-line/70 bg-white shadow-soft">
-      <div className="relative aspect-[4/3] overflow-hidden bg-green-soft">
+      <div className="relative aspect-[4/3] overflow-hidden bg-navy-soft">
         <Image
           src={treatment.imageUrl || TREATMENT_PLACEHOLDER}
           alt=""
@@ -20,7 +20,7 @@ export function TreatmentCard({ treatment, headingLevel = "h3" }: { treatment: T
       </div>
       <div className="flex flex-1 flex-col p-6">
         <H className="text-2xl">
-          <Link href={`/treatments/${treatment.slug}`} className="after:absolute after:inset-0 after:content-[''] hover:text-green-deep">
+          <Link href={`/treatments/${treatment.slug}`} className="after:absolute after:inset-0 after:content-[''] hover:text-navy-dark">
             {treatment.name}
           </Link>
         </H>
@@ -28,13 +28,13 @@ export function TreatmentCard({ treatment, headingLevel = "h3" }: { treatment: T
         <div className="mt-auto flex items-center justify-between gap-3 pt-5 text-sm">
           {treatment.duration ? (
             <span className="inline-flex items-center gap-1.5 text-muted">
-              <Clock className="size-4 text-teal-deep" aria-hidden="true" />
+              <Clock className="size-4 text-teal-dark" aria-hidden="true" />
               {treatment.duration}
             </span>
           ) : (
             <span />
           )}
-          <span className="inline-flex items-center gap-1 font-semibold text-green" aria-hidden="true">
+          <span className="inline-flex items-center gap-1 font-semibold text-navy" aria-hidden="true">
             Learn more <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
           </span>
         </div>

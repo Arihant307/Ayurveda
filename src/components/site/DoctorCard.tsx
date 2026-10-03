@@ -22,12 +22,12 @@ export function DoctorPhoto({ doctor, sizes, priority }: { doctor: Pick<Doctor, 
 export function DoctorCard({ doctor }: { doctor: Doctor }) {
   return (
     <article data-reveal className="lift group flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-line/70 bg-white shadow-soft">
-      <Link href={`/doctors/${doctor.slug}`} className="relative block aspect-[5/6] overflow-hidden bg-green-soft" tabIndex={-1} aria-hidden="true">
+      <Link href={`/doctors/${doctor.slug}`} className="relative block aspect-[5/6] overflow-hidden bg-navy-soft" tabIndex={-1} aria-hidden="true">
         <DoctorPhoto doctor={doctor} sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw" />
       </Link>
       <div className="flex flex-1 flex-col p-6">
         <h3 className="text-[1.75rem]">
-          <Link href={`/doctors/${doctor.slug}`} className="hover:text-green-deep">
+          <Link href={`/doctors/${doctor.slug}`} className="hover:text-navy-dark">
             {doctor.name}
           </Link>
         </h3>
@@ -38,7 +38,7 @@ export function DoctorCard({ doctor }: { doctor: Doctor }) {
           <LinkButton href={`/book?doctor=${doctor.slug}`} size="sm" icon={<CalendarCheck className="size-4" aria-hidden="true" />}>
             Book appointment<span className="sr-only"> with {doctor.name}</span>
           </LinkButton>
-          <Link href={`/doctors/${doctor.slug}`} className="inline-flex items-center gap-1 text-sm font-semibold text-green hover:underline underline-offset-4">
+          <Link href={`/doctors/${doctor.slug}`} className="inline-flex items-center gap-1 text-sm font-semibold text-navy hover:underline underline-offset-4">
             View profile <ArrowRight className="size-4" aria-hidden="true" />
             <span className="sr-only"> of {doctor.name}</span>
           </Link>

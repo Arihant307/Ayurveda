@@ -42,7 +42,7 @@ export function ImageUpload({
     <div>
       <p className="mb-1.5 text-[0.95rem] font-semibold">{label}</p>
       <div className="flex items-center gap-4">
-        <div className={`relative w-28 shrink-0 overflow-hidden rounded-xl border border-line bg-green-soft ${aspect}`}>
+        <div className={`relative w-28 shrink-0 overflow-hidden rounded-xl border border-line bg-navy-soft ${aspect}`}>
           <Image src={value || placeholder} alt="" fill sizes="112px" className="object-cover" />
         </div>
         <div className="flex flex-col gap-2">

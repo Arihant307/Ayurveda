@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
   <!-- PLACEHOLDER image. Upload a real photo from Admin › Treatments. -->
-  <rect width="800" height="600" fill="#E3EEE7"/>
+  <rect width="800" height="600" fill="#E9ECFB"/>
   <circle cx="640" cy="120" r="180" fill="#0DC0B2" opacity="0.12"/>
-  <circle cx="120" cy="520" r="220" fill="#0D4E34" opacity="0.07"/>
-  <g fill="none" stroke="#0D4E34" stroke-width="3" stroke-linecap="round" opacity="0.55">
+  <circle cx="120" cy="520" r="220" fill="#061685" opacity="0.07"/>
+  <g fill="none" stroke="#061685" stroke-width="3" stroke-linecap="round" opacity="0.55">
     <path d="M400 470 C 400 360 420 260 470 170"/>
-    <path d="M405 400 C 350 380 320 330 318 270 C 370 285 400 330 405 400 Z" fill="#0D4E34" fill-opacity="0.12"/>
+    <path d="M405 400 C 350 380 320 330 318 270 C 370 285 400 330 405 400 Z" fill="#061685" fill-opacity="0.12"/>
     <path d="M415 330 C 470 320 505 275 515 215 C 460 225 425 270 415 330 Z" fill="#0DC0B2" fill-opacity="0.18"/>
-    <path d="M430 255 C 395 230 382 190 388 145 C 425 165 440 205 430 255 Z" fill="#0D4E34" fill-opacity="0.12"/>
+    <path d="M430 255 C 395 230 382 190 388 145 C 425 165 440 205 430 255 Z" fill="#061685" fill-opacity="0.12"/>
     <path d="M300 470 Q 400 440 500 470"/>
   </g>
-  <text x="400" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#0D4E34" opacity="0.6" letter-spacing="2">PHOTO PLACEHOLDER</text>
+  <text x="400" y="545" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#061685" opacity="0.6" letter-spacing="2">PHOTO PLACEHOLDER</text>
 </svg>

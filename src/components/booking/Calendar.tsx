@@ -151,7 +151,7 @@ export function BookingCalendar({
           type="button"
           onClick={() => setMonth(addMonths(month, -1))}
           disabled={!canPrev}
-          className="flex size-11 items-center justify-center rounded-full text-green hover:bg-green-soft disabled:opacity-30 disabled:hover:bg-transparent"
+          className="flex size-11 items-center justify-center rounded-full text-navy hover:bg-navy-soft disabled:opacity-30 disabled:hover:bg-transparent"
           aria-label="Previous month"
         >
           <ChevronLeft className="size-5" aria-hidden="true" />
@@ -163,7 +163,7 @@ export function BookingCalendar({
           type="button"
           onClick={() => setMonth(addMonths(month, 1))}
           disabled={!canNext}
-          className="flex size-11 items-center justify-center rounded-full text-green hover:bg-green-soft disabled:opacity-30 disabled:hover:bg-transparent"
+          className="flex size-11 items-center justify-center rounded-full text-navy hover:bg-navy-soft disabled:opacity-30 disabled:hover:bg-transparent"
           aria-label="Next month"
         >
           <ChevronRight className="size-5" aria-hidden="true" />
@@ -210,16 +210,16 @@ export function BookingCalendar({
                         onClick={() => available && onChange(date)}
                         className={cn(
                           "relative flex aspect-square w-full flex-col items-center justify-center rounded-xl text-[0.95rem] transition-colors duration-150 sm:text-base",
-                          loading && "animate-pulse bg-cream-deep/60 text-transparent",
-                          !loading && selected && "bg-green font-bold text-white shadow-soft",
-                          !loading && !selected && available && "bg-green-soft/60 font-semibold text-green-deep hover:bg-green-soft hover:ring-2 hover:ring-teal",
+                          loading && "animate-pulse bg-soft/60 text-transparent",
+                          !loading && selected && "bg-navy font-bold text-white shadow-soft",
+                          !loading && !selected && available && "bg-teal-soft font-semibold text-teal-dark hover:bg-teal hover:text-navy-dark",
                           !loading && !available && status === "full" && "cursor-not-allowed text-muted line-through decoration-muted/60",
                           !loading && !available && status !== "full" && "cursor-not-allowed text-muted/45",
                         )}
                       >
                         {Number(date.slice(8))}
                         {isToday && !loading && (
-                          <span className={cn("absolute bottom-1 size-1 rounded-full", selected ? "bg-white" : "bg-teal-deep")} aria-hidden="true" />
+                          <span className={cn("absolute bottom-1 size-1 rounded-full", selected ? "bg-white" : "bg-teal-dark")} aria-hidden="true" />
                         )}
                       </button>
                     </td>
@@ -233,10 +233,10 @@ export function BookingCalendar({
 
       <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-1 border-t border-line pt-3 text-xs text-muted" aria-label="Legend">
         <li className="flex items-center gap-1.5">
-          <span className="size-3 rounded bg-green-soft ring-1 ring-green/30" aria-hidden="true" /> Available
+          <span className="size-3 rounded bg-teal-soft ring-1 ring-teal" aria-hidden="true" /> Available
         </li>
         <li className="flex items-center gap-1.5">
-          <span className="size-3 rounded bg-green" aria-hidden="true" /> Selected
+          <span className="size-3 rounded bg-navy" aria-hidden="true" /> Selected
         </li>
         <li className="flex items-center gap-1.5">
           <span className="text-muted line-through" aria-hidden="true">00</span> Fully booked

@@ -47,13 +47,13 @@ export function Header({ logo }: { logo: ReactNode }) {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 bg-cream transition-[box-shadow,border-color] duration-300",
+        "sticky top-0 z-50 bg-white transition-[box-shadow,border-color] duration-300",
         scrolled ? "border-b border-line shadow-soft" : "border-b border-transparent",
       )}
     >
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-green focus:px-4 focus:py-2 focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-full focus:bg-navy focus:px-4 focus:py-2 focus:text-white"
       >
         Skip to content
       </a>
@@ -69,7 +69,7 @@ export function Header({ logo }: { logo: ReactNode }) {
                   aria-current={isActive(link.href) ? "page" : undefined}
                   className={cn(
                     "relative rounded-full px-3.5 py-2 text-[0.975rem] font-semibold transition-colors",
-                    isActive(link.href) ? "text-green" : "text-ink/80 hover:text-green",
+                    isActive(link.href) ? "text-navy" : "text-navy/75 hover:text-navy",
                   )}
                 >
                   {link.label}
@@ -85,7 +85,7 @@ export function Header({ logo }: { logo: ReactNode }) {
         <div className="flex items-center gap-2">
           <a
             href={CLINIC.phoneHref}
-            className="hidden items-center gap-2 rounded-full px-3 py-2 text-[0.95rem] font-semibold text-green hover:bg-green-soft xl:inline-flex"
+            className="hidden items-center gap-2 rounded-full px-3 py-2 text-[0.95rem] font-semibold text-navy hover:bg-navy-soft xl:inline-flex"
           >
             <Phone className="size-4" aria-hidden="true" />
             {CLINIC.phoneDisplay}
@@ -98,7 +98,7 @@ export function Header({ logo }: { logo: ReactNode }) {
           <button
             ref={menuButton}
             type="button"
-            className="flex size-11 items-center justify-center rounded-full text-green hover:bg-green-soft lg:hidden"
+            className="flex size-11 items-center justify-center rounded-full text-navy hover:bg-navy-soft lg:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -113,7 +113,7 @@ export function Header({ logo }: { logo: ReactNode }) {
         id="mobile-menu"
         ref={panel}
         hidden={!open}
-        className="fixed inset-x-0 bottom-0 top-[4.5rem] z-40 overflow-y-auto bg-cream md:top-20 lg:hidden"
+        className="fixed inset-x-0 bottom-0 top-[4.5rem] z-40 overflow-y-auto bg-white md:top-20 lg:hidden"
       >
         <nav aria-label="Mobile" className="container-site flex min-h-full flex-col py-6 animate-fade-in">
           <ul className="divide-y divide-line border-y border-line">
@@ -124,7 +124,7 @@ export function Header({ logo }: { logo: ReactNode }) {
                   aria-current={isActive(link.href) ? "page" : undefined}
                   className={cn(
                     "flex min-h-14 items-center justify-between font-serif text-2xl font-semibold",
-                    isActive(link.href) ? "text-green" : "text-ink",
+                    isActive(link.href) ? "text-navy" : "text-navy/80",
                   )}
                 >
                   {link.label}

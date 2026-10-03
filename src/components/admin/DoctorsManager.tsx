@@ -81,13 +81,13 @@ export function DoctorsManager({ doctors }: { doctors: DoctorRow[] }) {
         <ul className="grid gap-4 md:grid-cols-2">
           {doctors.map((d) => (
             <li key={d.id} className="flex gap-4 rounded-[var(--radius-card)] border border-line/70 bg-white p-4 shadow-soft">
-              <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl bg-green-soft">
+              <div className="relative size-20 shrink-0 overflow-hidden rounded-2xl bg-navy-soft">
                 <Image src={d.photoUrl || "/images/placeholders/doctor.svg"} alt="" fill sizes="80px" className="object-cover" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <h2 className="text-2xl">{d.name}</h2>
-                  {d.isActive ? <Badge tone="green">Visible</Badge> : <Badge tone="danger">Deactivated</Badge>}
+                  {d.isActive ? <Badge tone="teal">Visible</Badge> : <Badge tone="danger">Deactivated</Badge>}
                 </div>
                 <p className="text-sm text-muted">{d.specialization || "No specialisation yet"}</p>
                 <p className="text-sm text-muted">{d.qualification || <span className="italic">Qualification not filled in yet</span>}</p>

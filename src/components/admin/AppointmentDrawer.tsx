@@ -161,7 +161,7 @@ export function AppointmentDrawer() {
                 <StatusBadge status={a.status} />
                 <span className="text-sm text-muted">{a.typeLabel}</span>
               </div>
-              <p className="mt-3 font-serif text-3xl font-semibold text-green">{formatTime(start)}</p>
+              <p className="mt-3 font-serif text-3xl font-semibold text-navy">{formatTime(start)}</p>
               <p className="text-lg">{formatDateLong(start)}</p>
               <p className="mt-1 text-muted">with {a.doctor.name}</p>
               {a.status === "CANCELLED" && a.cancelReason && (
@@ -227,7 +227,7 @@ export function AppointmentDrawer() {
               <ol className="mt-3 space-y-3 border-l-2 border-line pl-4">
                 {detail.logs.map((log) => (
                   <li key={log.id} className="relative text-[0.95rem]">
-                    <span className="absolute -left-[1.4rem] top-1.5 size-2.5 rounded-full bg-teal-deep" aria-hidden="true" />
+                    <span className="absolute -left-[1.4rem] top-1.5 size-2.5 rounded-full bg-teal-dark" aria-hidden="true" />
                     <p className="font-semibold">
                       {ACTION_LABEL[log.action] ?? log.action}
                       {log.toStatus && log.action !== "RESCHEDULED" && log.action !== "CREATED" && ` → ${STATUS_LABELS[log.toStatus as keyof typeof STATUS_LABELS]}`}

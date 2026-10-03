@@ -44,14 +44,14 @@ export default async function DoctorPage({ params }: Props) {
           ]),
         ]}
       />
-      <div className="relative overflow-hidden bg-cream-deep">
+      <div className="relative overflow-hidden bg-soft">
         <Mandala className="absolute -right-32 -top-32 size-96 text-teal opacity-25" />
         <div className="container-site relative py-8 md:py-14">
-          <Link href="/doctors" className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-green hover:underline underline-offset-4">
+          <Link href="/doctors" className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-navy hover:underline underline-offset-4">
             <ChevronLeft className="size-4" aria-hidden="true" /> All doctors
           </Link>
           <div className="mt-4 grid gap-10 md:grid-cols-[minmax(0,360px)_1fr] md:items-center">
-            <div className="relative mx-auto aspect-[5/6] w-full max-w-sm overflow-hidden rounded-[2rem] bg-green-soft shadow-lift animate-fade-up">
+            <div className="relative mx-auto aspect-[5/6] w-full max-w-sm overflow-hidden rounded-[2rem] bg-navy-soft shadow-lift animate-fade-up">
               <DoctorPhoto doctor={doctor} sizes="(min-width: 768px) 360px, 90vw" priority />
             </div>
             <div className="animate-fade-up [animation-delay:80ms]">
@@ -95,7 +95,7 @@ export default async function DoctorPage({ params }: Props) {
               <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                 {doctor.expertise.map((e) => (
                   <li key={e} className="flex gap-3 rounded-2xl border border-line/70 bg-white p-4">
-                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-teal-deep" aria-hidden="true" />
+                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-teal-dark" aria-hidden="true" />
                     <span>{e}</span>
                   </li>
                 ))}
@@ -107,7 +107,7 @@ export default async function DoctorPage({ params }: Props) {
         <aside aria-labelledby="timings-title" className="lg:sticky lg:top-28 lg:self-start">
           <div data-reveal className="rounded-[var(--radius-card)] border border-line/70 bg-white p-6 shadow-soft">
             <h2 id="timings-title" className="flex items-center gap-2 text-3xl">
-              <Clock className="size-6 text-teal-deep" aria-hidden="true" /> Consultation timings
+              <Clock className="size-6 text-teal-dark" aria-hidden="true" /> Consultation timings
             </h2>
             <dl className="mt-5 divide-y divide-line">
               {timings.map((g) => (

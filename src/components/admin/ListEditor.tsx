@@ -39,9 +39,9 @@ export function ListEditor({ label, items, onChange, placeholder }: { label: str
           }}
           placeholder={placeholder ?? "Type and press Add"}
           aria-label={`Add to ${label}`}
-          className="min-h-11 flex-1 rounded-xl border border-line bg-white px-3 focus:border-teal-deep focus:outline-none focus:ring-4 focus:ring-teal-soft"
+          className="min-h-11 flex-1 rounded-xl border border-line bg-white px-3 focus:border-teal-dark focus:outline-none focus:ring-4 focus:ring-teal-soft"
         />
-        <button type="button" onClick={add} className="inline-flex min-h-11 items-center gap-1 rounded-full bg-teal-soft px-4 font-semibold text-green-deep hover:bg-green-soft">
+        <button type="button" onClick={add} className="inline-flex min-h-11 items-center gap-1 rounded-full bg-teal-soft px-4 font-semibold text-navy-dark hover:bg-navy-soft">
           <Plus className="size-4" aria-hidden="true" /> Add
         </button>
       </div>

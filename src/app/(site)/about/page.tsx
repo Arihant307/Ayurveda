@@ -40,7 +40,7 @@ const PILLARS = [
 export default function AboutPage() {
   return (
     <>
-      <PageHero eyebrow="About us" title={<>A clinic built on <span className="italic text-navy">listening</span></>}>
+      <PageHero eyebrow="About us" title={<>A clinic built on <span className="italic text-accent-gradient pr-1">listening</span></>}>
         Kumar Ayurveda brings the classical science of Ayurveda to Vaishali Nagar, Jaipur — practised with patience,
         personal attention and modern clinical care.
       </PageHero>
@@ -48,10 +48,10 @@ export default function AboutPage() {
       <Section tone="white" className="overflow-hidden">
         <div className="container-site grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
           <div data-reveal className="relative">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem_8rem_2rem_2rem] bg-green-soft shadow-soft">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem_8rem_2rem_2rem] bg-navy-soft shadow-soft">
               <Image src="/images/placeholders/clinic.svg" alt="The consultation room at Kumar Ayurveda" fill sizes="(min-width: 1024px) 520px, 100vw" className="object-cover" />
             </div>
-            <LeafSprig className="absolute -bottom-10 -right-6 h-40 text-teal-deep opacity-30" />
+            <LeafSprig className="absolute -bottom-10 -right-6 h-40 text-teal-dark opacity-30" />
           </div>
           <div className="prose-clinic text-lg" data-reveal>
             <p className="eyebrow">Our story</p>
@@ -79,13 +79,13 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section labelledBy="approach-title">
+      <Section tone="soft" labelledBy="approach-title">
         <div className="container-site">
           <SectionHeading id="approach-title" eyebrow="Our approach" title="Four things we never compromise on" align="center" />
           <ul className="mt-12 grid gap-6 sm:grid-cols-2">
             {PILLARS.map(({ Icon, title, text }, i) => (
               <li key={title} data-reveal style={{ transitionDelay: `${i * 70}ms` }} className="flex gap-5 rounded-[var(--radius-card)] border border-line/70 bg-white p-6 md:p-8">
-                <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-teal-soft text-teal-deep">
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-teal-soft text-teal-dark">
                   <Icon className="size-6" aria-hidden="true" />
                 </span>
                 <div>
@@ -109,7 +109,7 @@ export default function AboutPage() {
               ["Follow-up", "Regular reviews to see what is working and adjust what isn’t."],
             ].map(([title, text], i) => (
               <li key={title} className="flex gap-5">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-green font-semibold text-white">{i + 1}</span>
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-navy font-semibold text-white">{i + 1}</span>
                 <div>
                   <h3 className="text-2xl">{title}</h3>
                   <p className="mt-1 text-muted">{text}</p>

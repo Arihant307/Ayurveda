@@ -5,8 +5,8 @@ import { cn } from "@/lib/cn";
 
 const control =
   "block w-full rounded-xl border bg-white px-4 py-3 text-base text-ink placeholder:text-muted/70 " +
-  "transition-colors duration-150 focus:outline-none focus:ring-4 focus:ring-teal-soft focus:border-teal-deep " +
-  "disabled:bg-cream-deep disabled:text-muted";
+  "transition-colors duration-150 focus:outline-none focus:ring-4 focus:ring-teal-soft focus:border-teal-dark " +
+  "disabled:bg-soft disabled:text-muted";
 
 type Common = {
   label: ReactNode;
@@ -159,7 +159,7 @@ export function ChoiceGroup<T extends string>({
               className={cn(
                 "relative flex min-h-12 cursor-pointer items-center rounded-xl border-2 px-3.5 py-2.5 text-[0.95rem] transition-colors",
                 "has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-teal-soft",
-                checked ? "border-green bg-green-soft font-semibold text-green-deep" : "border-line bg-white hover:border-teal-deep",
+                checked ? "border-navy bg-navy-soft font-semibold text-navy-dark" : "border-line bg-white hover:border-teal-dark",
                 error && !value && "border-danger/60",
               )}
             >
@@ -191,7 +191,7 @@ export function ChoiceGroup<T extends string>({
 export function Checkbox({ label, className, ...rest }: { label: ReactNode; className?: string } & ComponentProps<"input">) {
   return (
     <label className={cn("inline-flex min-h-11 cursor-pointer items-center gap-3 text-[0.95rem]", className)}>
-      <input type="checkbox" className="size-5 rounded accent-green" {...rest} />
+      <input type="checkbox" className="size-5 rounded accent-navy" {...rest} />
       <span>{label}</span>
     </label>
   );

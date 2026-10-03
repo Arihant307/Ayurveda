@@ -29,7 +29,7 @@ export function AppointmentTable({ items, showDate = true }: { items: Appointmen
             <Link href={href(a.id)} scroll={false} className="block rounded-2xl border border-line/70 bg-white p-4 shadow-soft active:scale-[0.99] transition-transform">
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="font-serif text-2xl font-semibold leading-tight text-green">{formatTimeString(a.time)}</p>
+                  <p className="font-serif text-2xl font-semibold leading-tight text-navy">{formatTimeString(a.time)}</p>
                   {showDate && <p className="text-sm text-muted">{formatDateStringMedium(a.date)}</p>}
                 </div>
                 <StatusBadge status={a.status} />
@@ -52,7 +52,7 @@ export function AppointmentTable({ items, showDate = true }: { items: Appointmen
       {/* Tablets and up: table */}
       <div className="hidden overflow-hidden rounded-[var(--radius-card)] border border-line/70 bg-white shadow-soft md:block">
         <table className="w-full text-left text-[0.95rem]">
-          <thead className="border-b border-line bg-cream text-sm text-muted">
+          <thead className="border-b border-line bg-soft text-sm text-muted">
             <tr>
               <th scope="col" className="px-4 py-3 font-semibold">{showDate ? "Date & time" : "Time"}</th>
               <th scope="col" className="px-4 py-3 font-semibold">Patient</th>
@@ -64,13 +64,13 @@ export function AppointmentTable({ items, showDate = true }: { items: Appointmen
           </thead>
           <tbody className="divide-y divide-line">
             {items.map((a) => (
-              <tr key={a.id} className="group relative hover:bg-green-soft/40">
+              <tr key={a.id} className="group relative hover:bg-navy-soft/40">
                 <td className="px-4 py-3">
                   <span className="font-semibold">{formatTimeString(a.time)}</span>
                   {showDate && <span className="block text-sm text-muted">{formatDateStringMedium(a.date)}</span>}
                 </td>
                 <td className="px-4 py-3">
-                  <Link href={href(a.id)} scroll={false} className="font-semibold text-ink after:absolute after:inset-0 after:content-[''] hover:text-green">
+                  <Link href={href(a.id)} scroll={false} className="font-semibold text-ink after:absolute after:inset-0 after:content-[''] hover:text-navy">
                     {a.patientName}
                   </Link>
                   <span className="block text-sm text-muted">

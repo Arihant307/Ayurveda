@@ -57,8 +57,8 @@ export function TestimonialsManager({ items }: { items: TestimonialRow[] }) {
             <li key={t.id} className="flex flex-col rounded-[var(--radius-card)] border border-line/70 bg-white p-4 shadow-soft">
               <div className="flex flex-wrap items-center gap-2">
                 <h2 className="font-sans text-lg font-bold text-ink">{t.patientName}</h2>
-                {t.isPublished ? <Badge tone="green">Published</Badge> : <Badge>Draft</Badge>}
-                {t.rating && <Badge tone="saffron">{t.rating}/5</Badge>}
+                {t.isPublished ? <Badge tone="teal">Published</Badge> : <Badge>Draft</Badge>}
+                {t.rating && <Badge tone="navy">{t.rating}/5</Badge>}
               </div>
               {t.context && <p className="text-sm text-muted">{t.context}</p>}
               <p className="mt-2 line-clamp-4 flex-1">“{t.content}”</p>

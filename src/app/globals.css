@@ -2,37 +2,41 @@
 
 /* ───────────────────────────────────────────────────────────────────────────
    Brand tokens — the ONLY place colours are defined. Everything else uses the
-   Tailwind utilities generated from @theme below (bg-green, text-navy, …).
+   Tailwind utilities generated from @theme below (bg-navy, text-teal-dark, …).
+   Palette taken from the Kumar Ayurveda logo.
    ─────────────────────────────────────────────────────────────────────────── */
 :root {
-  /* Core brand (from the logo) */
-  --brand-green: #0d4e34;
-  --brand-navy: #061685;
-  --brand-teal: #0dc0b2;
-  --brand-magenta: #e01993;
-  --brand-violet: #5b1bca;
-  --brand-saffron: #f9a95c;
-  --brand-cream: #fcf9f0;
+  /* Logo colours */
+  --brand-navy: #061685;          /* "KUMAR AYURVEDA" lettering — primary */
+  --brand-navy-dark: #040e5c;     /* hover / active */
+  --brand-teal: #0dc0b2;          /* leaf — secondary, icons, decoration */
+  --brand-teal-dark: #077a71;     /* teal text & links (AA on white) */
+  --brand-magenta: #e01993;       /* cross (top) — accent gradient only */
+  --brand-violet: #5b1bca;        /* cross (bottom) — accent gradient only */
 
-  /* Derived shades (for states and accessible text) */
-  --brand-green-deep: #093b27;
-  --brand-green-soft: #e3eee7;
-  --brand-teal-deep: #08766d;
-  --brand-teal-soft: #dcf5f2;
-  --brand-saffron-soft: #fdf0e1;
-  --brand-cream-deep: #f4eedd;
-  --brand-ink: #1f2a24;
-  --brand-muted: #5b6660;
-  --brand-line: #e7e1d0;
-  --brand-white: #ffffff;
-  --brand-danger: #b42318;
+  /* Surfaces & text */
+  --brand-white: #ffffff;         /* page background */
+  --brand-soft: #f5f7ff;          /* alternate sections, cards */
+  --brand-ink: #1a1f3d;           /* body text */
+  --brand-muted: #50567a;         /* secondary text (AA on white and soft) */
+  --brand-line: #e1e5f3;          /* borders, dividers */
+
+  /* Tints derived from the logo colours */
+  --brand-navy-soft: #e9ecfb;     /* selected / hover backgrounds */
+  --brand-teal-soft: #ddf6f3;     /* available dates, info backgrounds */
+  --brand-on-navy-muted: #c9cff4; /* secondary text on navy */
+
+  /* Status colours (admin badges, alerts) */
+  --brand-amber: #92400e;         /* pending / warning text */
+  --brand-amber-soft: #fef3c7;
+  --brand-amber-line: #f59e0b;
+  --brand-danger: #b42318;        /* cancelled / errors */
   --brand-danger-soft: #fdecea;
-  --brand-warning: #8a5300;
-  --brand-warning-soft: #fdf2df;
-  --brand-on-green-muted: #cfe7dc;
 
-  --shadow-soft: 0 1px 2px rgb(13 78 52 / 0.04), 0 8px 24px -8px rgb(13 78 52 / 0.12);
-  --shadow-lift: 0 2px 4px rgb(13 78 52 / 0.06), 0 18px 40px -12px rgb(13 78 52 / 0.2);
+  --gradient-accent: linear-gradient(90deg, var(--brand-magenta), var(--brand-violet));
+
+  --shadow-soft: 0 1px 2px rgb(6 22 133 / 0.04), 0 8px 24px -8px rgb(6 22 133 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(6 22 133 / 0.06), 0 18px 40px -12px rgb(6 22 133 / 0.2);
 }
 
 @theme inline {
@@ -43,27 +47,24 @@
   --color-white: var(--brand-white);
   --color-black: #000;
 
-  --color-green: var(--brand-green);
-  --color-green-deep: var(--brand-green-deep);
-  --color-green-soft: var(--brand-green-soft);
   --color-navy: var(--brand-navy);
+  --color-navy-dark: var(--brand-navy-dark);
+  --color-navy-soft: var(--brand-navy-soft);
   --color-teal: var(--brand-teal);
-  --color-teal-deep: var(--brand-teal-deep);
+  --color-teal-dark: var(--brand-teal-dark);
   --color-teal-soft: var(--brand-teal-soft);
   --color-magenta: var(--brand-magenta);
   --color-violet: var(--brand-violet);
-  --color-saffron: var(--brand-saffron);
-  --color-saffron-soft: var(--brand-saffron-soft);
-  --color-cream: var(--brand-cream);
-  --color-cream-deep: var(--brand-cream-deep);
+  --color-soft: var(--brand-soft);
   --color-ink: var(--brand-ink);
   --color-muted: var(--brand-muted);
   --color-line: var(--brand-line);
+  --color-on-navy-muted: var(--brand-on-navy-muted);
+  --color-amber: var(--brand-amber);
+  --color-amber-soft: var(--brand-amber-soft);
+  --color-amber-line: var(--brand-amber-line);
   --color-danger: var(--brand-danger);
   --color-danger-soft: var(--brand-danger-soft);
-  --color-warning: var(--brand-warning);
-  --color-warning-soft: var(--brand-warning-soft);
-  --color-on-green-muted: var(--brand-on-green-muted);
 
   --font-serif: var(--font-heading), "Cormorant Garamond", Georgia, serif;
   --font-sans: var(--font-body), var(--font-devanagari), system-ui, sans-serif;
@@ -106,7 +107,7 @@
     scroll-padding-top: 6rem;
   }
   body {
-    background: var(--brand-cream);
+    background: var(--brand-white);
     color: var(--brand-ink);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
@@ -116,7 +117,7 @@
   }
   h1, h2, h3, h4 {
     font-family: var(--font-serif);
-    color: var(--brand-green);
+    color: var(--brand-navy);
     line-height: 1.12;
     font-weight: 600;
     letter-spacing: -0.01em;
@@ -126,13 +127,15 @@
   /* Cormorant defaults to old-style figures; lining figures read better for times and dates. */
   h1, h2, h3, h4, .font-serif { font-variant-numeric: lining-nums; }
   :lang(hi), :lang(sa) { font-family: var(--font-deva); }
-  ::selection { background: var(--brand-teal-soft); color: var(--brand-green-deep); }
+  ::selection { background: var(--brand-teal-soft); color: var(--brand-navy-dark); }
 
   :focus-visible {
-    outline: 3px solid var(--brand-teal-deep);
+    outline: 3px solid var(--brand-teal-dark);
     outline-offset: 2px;
     border-radius: 6px;
   }
+  /* On navy surfaces (footer, admin sidebar, CTA) the bright logo teal keeps the ring visible. */
+  .bg-navy :focus-visible { outline-color: var(--brand-teal); }
   button, [role="button"], a { -webkit-tap-highlight-color: transparent; }
   button:not(:disabled), [role="button"] { cursor: pointer; }
 }
@@ -154,7 +157,7 @@
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--brand-teal-deep);
+    color: var(--brand-teal-dark);
   }
 
   .prose-clinic p + p { margin-top: 1rem; }
@@ -162,7 +165,17 @@
   .prose-clinic h3 { font-size: 1.35rem; margin-top: 1.75rem; margin-bottom: 0.5rem; }
   .prose-clinic ul { list-style: disc; padding-left: 1.25rem; margin-top: 0.75rem; }
   .prose-clinic li + li { margin-top: 0.35rem; }
-  .prose-clinic a { color: var(--brand-green); text-decoration: underline; text-underline-offset: 3px; }
+  .prose-clinic a { color: var(--brand-navy); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Logo accent (magenta → violet, from the cross). Use sparingly: underlines,
+     highlight words, badges, progress, confirmation — never body text or full backgrounds. */
+  .bg-accent-gradient { background-image: var(--gradient-accent); }
+  .text-accent-gradient {
+    background-image: var(--gradient-accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 
   /* Hover lift used by cards */
   .lift {

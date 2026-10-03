@@ -34,11 +34,14 @@ const NAV = [
 export function AdminShell({
   admin,
   logo,
+  logoOnDark,
   unreadMessages,
   children,
 }: {
   admin: { name: string; role: "OWNER" | "STAFF" };
   logo: ReactNode;
+  /** White-text logo for the navy sidebar */
+  logoOnDark: ReactNode;
   unreadMessages: number;
   children: ReactNode;
 }) {
@@ -66,13 +69,14 @@ export function AdminShell({
               aria-current={isActive(href) ? "page" : undefined}
               className={cn(
                 "flex min-h-12 items-center gap-3 rounded-xl px-3 text-[1rem] font-semibold transition-colors",
-                isActive(href) ? "bg-green text-white" : "text-ink hover:bg-green-soft",
+                isActive(href) ? "bg-white text-navy" : "text-white/90 hover:bg-white/10 hover:text-white",
               )}
             >
               <Icon className="size-5 shrink-0" aria-hidden="true" />
               <span className="flex-1">{label}</span>
               {href === "/admin/messages" && unreadMessages > 0 && (
-                <span className={cn("rounded-full px-2 py-0.5 text-xs", isActive(href) ? "bg-white text-green" : "bg-saffron text-ink")}>
+                <span className={cn("inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-bold", isActive(href) ? "bg-navy-soft text-navy" : "bg-white text-navy")}>
+                  <span className="size-1.5 rounded-full bg-accent-gradient" aria-hidden="true" />
                   {unreadMessages}
                   <span className="sr-only"> unread</span>
                 </span>
@@ -81,19 +85,19 @@ export function AdminShell({
           </li>
         ))}
       </ul>
-      <div className="mt-auto space-y-1 border-t border-line pt-4">
-        <p className="px-3 text-sm text-muted">
-          Signed in as <strong className="text-ink">{admin.name}</strong>
+      <div className="mt-auto space-y-1 border-t border-white/15 pt-4">
+        <p className="px-3 text-sm text-on-navy-muted">
+          Signed in as <strong className="text-white">{admin.name}</strong>
           <span className="block text-xs">{admin.role === "OWNER" ? "Owner" : "Staff"}</span>
         </p>
-        <a href="/" target="_blank" rel="noopener noreferrer" className="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-semibold text-green hover:bg-green-soft">
+        <a href="/" target="_blank" rel="noopener noreferrer" className="flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-semibold text-white hover:bg-white/10">
           <ExternalLink className="size-4" aria-hidden="true" /> View website
         </a>
         <button
           type="button"
           onClick={signOut}
           disabled={signingOut}
-          className="flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-sm font-semibold text-danger hover:bg-danger-soft disabled:opacity-60"
+          className="flex min-h-11 w-full items-center gap-3 rounded-xl px-3 text-sm font-semibold text-white hover:bg-white/10 disabled:opacity-60"
         >
           <LogOut className="size-4" aria-hidden="true" /> {signingOut ? "Signing out…" : "Sign out"}
         </button>
@@ -103,8 +107,8 @@ export function AdminShell({
 
   return (
     <div className="flex min-h-dvh flex-1">
-      <aside className="sticky top-0 hidden h-dvh w-72 shrink-0 flex-col gap-6 border-r border-line bg-white px-4 py-6 lg:flex">
-        <div className="px-2">{logo}</div>
+      <aside className="sticky top-0 hidden h-dvh w-72 shrink-0 flex-col gap-6 bg-navy px-4 py-6 lg:flex">
+        <div className="px-2">{logoOnDark}</div>
         {nav}
       </aside>
 
@@ -114,7 +118,7 @@ export function AdminShell({
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="flex size-11 items-center justify-center rounded-full text-green hover:bg-green-soft"
+            className="flex size-11 items-center justify-center rounded-full text-navy hover:bg-navy-soft"
             aria-label="Open menu"
             aria-expanded={open}
           >
@@ -123,10 +127,10 @@ export function AdminShell({
         </header>
         {open && (
           <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Admin menu">
-            <button type="button" className="absolute inset-0 bg-green-deep/40" aria-label="Close menu" onClick={() => setOpen(false)} />
-            <div className="absolute inset-y-0 right-0 flex w-[min(20rem,88vw)] flex-col gap-4 bg-white px-4 py-4 shadow-lift animate-fade-in">
+            <button type="button" className="absolute inset-0 bg-navy-dark/40" aria-label="Close menu" onClick={() => setOpen(false)} />
+            <div className="absolute inset-y-0 right-0 flex w-[min(20rem,88vw)] flex-col gap-4 bg-navy px-4 py-4 shadow-lift animate-fade-in">
               <div className="flex justify-end">
-                <button type="button" onClick={() => setOpen(false)} className="flex size-11 items-center justify-center rounded-full hover:bg-green-soft" aria-label="Close menu">
+                <button type="button" onClick={() => setOpen(false)} className="flex size-11 items-center justify-center rounded-full text-white hover:bg-white/10" aria-label="Close menu">
                   <X className="size-6" aria-hidden="true" />
                 </button>
               </div>

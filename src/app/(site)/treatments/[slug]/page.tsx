@@ -45,17 +45,17 @@ export default async function TreatmentPage({ params }: Props) {
           ]),
         ]}
       />
-      <div className="bg-cream-deep">
+      <div className="bg-soft">
         <div className="container-site grid gap-10 py-8 md:grid-cols-2 md:items-center md:py-14">
           <div className="animate-fade-up">
-            <Link href="/treatments" className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-green hover:underline underline-offset-4">
+            <Link href="/treatments" className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-navy hover:underline underline-offset-4">
               <ChevronLeft className="size-4" aria-hidden="true" /> All treatments
             </Link>
             <h1 className="mt-3 text-5xl md:text-6xl">{treatment.name}</h1>
             <p className="mt-4 text-lg text-muted md:text-xl">{treatment.shortDescription}</p>
             {treatment.duration && (
               <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[0.95rem] shadow-soft">
-                <Clock className="size-4 text-teal-deep" aria-hidden="true" />
+                <Clock className="size-4 text-teal-dark" aria-hidden="true" />
                 <span className="font-semibold">Duration:</span> {treatment.duration}
               </p>
             )}
@@ -68,7 +68,7 @@ export default async function TreatmentPage({ params }: Props) {
               </AnchorButton>
             </div>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem_2rem_6rem_2rem] bg-green-soft shadow-lift animate-fade-up [animation-delay:80ms]">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem_2rem_6rem_2rem] bg-navy-soft shadow-lift animate-fade-up [animation-delay:80ms]">
             <Image
               src={treatment.imageUrl || TREATMENT_PLACEHOLDER}
               alt={`${treatment.name} at Kumar Ayurveda`}
@@ -89,7 +89,7 @@ export default async function TreatmentPage({ params }: Props) {
               <p key={i}>{p}</p>
             ))}
           </div>
-          <p className="mt-8 rounded-2xl border border-saffron/50 bg-saffron-soft px-5 py-4 text-[0.95rem] text-ink">
+          <p className="mt-8 rounded-2xl border border-teal/50 bg-soft px-5 py-4 text-[0.95rem] text-ink">
             Suitability, number of sessions and duration are decided by your physician after consultation. Ayurvedic therapies
             support general wellbeing and are not a substitute for medical diagnosis or treatment.
           </p>
@@ -101,7 +101,7 @@ export default async function TreatmentPage({ params }: Props) {
               <ul className="mt-4 space-y-3">
                 {treatment.benefits.map((b) => (
                   <li key={b} className="flex gap-3">
-                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-teal-deep" aria-hidden="true" />
+                    <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-teal-dark" aria-hidden="true" />
                     <span>{b}</span>
                   </li>
                 ))}
@@ -115,7 +115,7 @@ export default async function TreatmentPage({ params }: Props) {
       </div>
 
       {related.length > 0 && (
-        <Section tone="white" labelledBy="related-title">
+        <Section tone="soft" labelledBy="related-title">
           <div className="container-site">
             <SectionHeading id="related-title" title="Other treatments" />
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -23,18 +23,18 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
           <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {items.map((t) => (
               <li key={t.id} data-reveal>
-                <figure className="flex h-full flex-col rounded-[var(--radius-card)] border border-line/70 bg-cream p-6">
+                <figure className="flex h-full flex-col rounded-[var(--radius-card)] border border-line/70 bg-soft p-6">
                   <Quote className="size-8 text-teal" aria-hidden="true" />
                   {t.rating ? (
                     <div className="mt-3 flex gap-0.5" role="img" aria-label={`${t.rating} out of 5 stars`}>
                       {Array.from({ length: 5 }, (_, i) => (
-                        <Star key={i} className={i < t.rating! ? "size-4 fill-saffron text-saffron" : "size-4 text-line"} aria-hidden="true" />
+                        <Star key={i} className={i < t.rating! ? "size-4 fill-teal text-teal" : "size-4 text-line"} aria-hidden="true" />
                       ))}
                     </div>
                   ) : null}
                   <blockquote className="mt-3 flex-1 text-[1.05rem] leading-relaxed">“{t.content}”</blockquote>
                   <figcaption className="mt-5 border-t border-line pt-4">
-                    <span className="block font-semibold text-green">{t.patientName}</span>
+                    <span className="block font-semibold text-navy">{t.patientName}</span>
                     {t.context && <span className="text-sm text-muted">{t.context}</span>}
                   </figcaption>
                 </figure>

@@ -50,7 +50,7 @@ export default async function SchedulesPage({ searchParams }: { searchParams: Pr
                   aria-selected={d.id === doctor.id}
                   href={`/admin/schedules?doctor=${d.id}`}
                   scroll={false}
-                  className={cn("rounded-full border-2 px-4 py-2 font-semibold", d.id === doctor.id ? "border-green bg-green text-white" : "border-line bg-white text-ink hover:border-teal-deep")}
+                  className={cn("rounded-full border-2 px-4 py-2 font-semibold", d.id === doctor.id ? "border-navy bg-navy text-white" : "border-line bg-white text-ink hover:border-teal-dark")}
                 >
                   {d.name}
                   {!d.isActive && " (inactive)"}

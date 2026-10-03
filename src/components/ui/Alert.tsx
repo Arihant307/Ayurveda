@@ -3,9 +3,9 @@ import { AlertTriangle, CheckCircle2, Info, XCircle } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 const styles = {
-  info: { box: "bg-teal-soft text-green-deep border-teal/40", Icon: Info },
-  success: { box: "bg-green-soft text-green-deep border-green/30", Icon: CheckCircle2 },
-  warning: { box: "bg-warning-soft text-warning border-saffron/60", Icon: AlertTriangle },
+  info: { box: "bg-teal-soft text-navy-dark border-teal/50", Icon: Info },
+  success: { box: "bg-teal-soft text-teal-dark border-teal-dark/40", Icon: CheckCircle2 },
+  warning: { box: "bg-amber-soft text-amber border-amber-line", Icon: AlertTriangle },
   error: { box: "bg-danger-soft text-danger border-danger/30", Icon: XCircle },
 };
 

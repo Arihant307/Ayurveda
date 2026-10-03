@@ -18,16 +18,16 @@ export const metadata = pageMetadata({
 export default async function BookPage() {
   const [doctors, treatments] = await Promise.all([getActiveDoctors(), getVisibleTreatments()]);
   return (
-    <div className="bg-cream">
+    <div className="bg-white">
       <div className="container-site max-w-3xl pb-16 pt-6 md:pt-12">
         <header className="mb-6 md:mb-8">
           <p className="eyebrow">Online booking</p>
           <h1 className="mt-2 text-[2.4rem] leading-tight md:text-5xl">Book an appointment</h1>
           <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.95rem] text-muted">
             <span className="inline-flex items-center gap-1.5">
-              <ShieldCheck className="size-4 text-teal-deep" aria-hidden="true" /> Takes about a minute
+              <ShieldCheck className="size-4 text-teal-dark" aria-hidden="true" /> Takes about a minute
             </span>
-            <a href={CLINIC.phoneHref} className="inline-flex items-center gap-1.5 font-semibold text-green hover:underline underline-offset-4">
+            <a href={CLINIC.phoneHref} className="inline-flex items-center gap-1.5 font-semibold text-navy hover:underline underline-offset-4">
               <Phone className="size-4" aria-hidden="true" /> Prefer to call? {CLINIC.phoneDisplay}
             </a>
           </p>

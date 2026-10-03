@@ -48,10 +48,17 @@ export function BookingSuccess({ result }: { result: BookingResult }) {
 
   return (
     <div className="text-center">
-      <div className="mx-auto flex size-24 items-center justify-center rounded-full bg-green-soft animate-pop">
-        <svg viewBox="0 0 52 52" className="size-14 text-green" aria-hidden="true">
-          <circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" strokeOpacity="0.25" strokeWidth="3" />
-          <path className="draw-check" d="M15 27l7 7 15-16" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      <div className="mx-auto flex size-24 items-center justify-center rounded-full bg-navy-soft animate-pop">
+        <svg viewBox="0 0 52 52" className="size-14 text-navy" aria-hidden="true">
+          <defs>
+            {/* Logo accent: magenta → violet (colours come from the CSS tokens) */}
+            <linearGradient id="check-accent" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" style={{ stopColor: "var(--brand-magenta)" }} />
+              <stop offset="100%" style={{ stopColor: "var(--brand-violet)" }} />
+            </linearGradient>
+          </defs>
+          <circle cx="26" cy="26" r="24" fill="none" stroke="currentColor" strokeOpacity="0.2" strokeWidth="3" />
+          <path className="draw-check" d="M15 27l7 7 15-16" fill="none" stroke="url(#check-accent)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </div>
       <h2 ref={heading} tabIndex={-1} className="mt-6 text-4xl outline-none sm:text-5xl animate-fade-up">
@@ -92,10 +99,10 @@ export function BookingSuccess({ result }: { result: BookingResult }) {
         </AnchorButton>
       </div>
 
-      <div className="mx-auto mt-8 max-w-lg rounded-2xl bg-cream-deep px-5 py-4 text-left text-[0.95rem]">
-        <p className="font-semibold text-green">Need to reschedule or cancel?</p>
+      <div className="mx-auto mt-8 max-w-lg rounded-2xl bg-soft px-5 py-4 text-left text-[0.95rem]">
+        <p className="font-semibold text-navy">Need to reschedule or cancel?</p>
         <p className="mt-1 text-muted">
-          Please call <a href={CLINIC.phoneHref} className="font-semibold text-green underline underline-offset-4">{CLINIC.phoneDisplay}</a> with
+          Please call <a href={CLINIC.phoneHref} className="font-semibold text-navy underline underline-offset-4">{CLINIC.phoneDisplay}</a> with
           your appointment ID. Arrive 10 minutes early and bring any previous reports.
         </p>
       </div>

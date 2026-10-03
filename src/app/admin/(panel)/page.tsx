@@ -39,9 +39,9 @@ export default async function OverviewPage({ searchParams }: { searchParams: Pro
   ]);
 
   const cards: { label: string; value: number; href: string; Icon: typeof Clock3; tone: string; status?: AppointmentStatus }[] = [
-    { label: "Today", value: todayCount, href: `/admin/appointments?date=${today}`, Icon: CalendarCheck, tone: "bg-green text-white" },
+    { label: "Today", value: todayCount, href: `/admin/appointments?date=${today}`, Icon: CalendarCheck, tone: "bg-navy text-white" },
     { label: "Upcoming", value: upcoming, href: "/admin/appointments", Icon: CalendarDays, tone: "bg-white" },
-    { label: "Pending", value: pending, href: "/admin/appointments?status=PENDING", Icon: Clock3, tone: "bg-saffron-soft" },
+    { label: "Pending", value: pending, href: "/admin/appointments?status=PENDING", Icon: Clock3, tone: "bg-amber-soft" },
     { label: "Completed", value: completed, href: "/admin/appointments?status=COMPLETED&when=all", Icon: CheckCheck, tone: "bg-white" },
     { label: "Cancelled", value: cancelled, href: "/admin/appointments?status=CANCELLED&when=all", Icon: XCircle, tone: "bg-white" },
     { label: "Total", value: total, href: "/admin/appointments?when=all", Icon: ListChecks, tone: "bg-white" },
@@ -63,9 +63,9 @@ export default async function OverviewPage({ searchParams }: { searchParams: Pro
         {cards.map(({ label, value, href, Icon, tone }) => (
           <li key={label}>
             <Link href={href} className={cn("lift flex h-full flex-col rounded-[var(--radius-card)] border border-line/70 p-4 shadow-soft md:p-5", tone)}>
-              <Icon className={cn("size-5", tone.includes("text-white") ? "text-on-green-muted" : "text-teal-deep")} aria-hidden="true" />
+              <Icon className={cn("size-5", tone.includes("text-white") ? "text-on-navy-muted" : "text-teal-dark")} aria-hidden="true" />
               <span className="mt-3 font-serif text-4xl font-semibold leading-none">{value}</span>
-              <span className={cn("mt-1 text-sm font-semibold", tone.includes("text-white") ? "text-on-green-muted" : "text-muted")}>{label}</span>
+              <span className={cn("mt-1 text-sm font-semibold", tone.includes("text-white") ? "text-on-navy-muted" : "text-muted")}>{label}</span>
             </Link>
           </li>
         ))}
@@ -74,7 +74,7 @@ export default async function OverviewPage({ searchParams }: { searchParams: Pro
       <section aria-labelledby="today-h" className="mt-10">
         <div className="mb-4 flex items-center justify-between gap-3">
           <h2 id="today-h" className="text-3xl">Today’s appointments</h2>
-          <Link href={`/admin/calendar?view=day&date=${today}`} className="text-sm font-semibold text-green hover:underline underline-offset-4">
+          <Link href={`/admin/calendar?view=day&date=${today}`} className="text-sm font-semibold text-navy hover:underline underline-offset-4">
             Day view
           </Link>
         </div>

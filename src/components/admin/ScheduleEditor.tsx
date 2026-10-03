@@ -58,7 +58,7 @@ export function ScheduleEditor({ doctorId, doctorName, initial }: { doctorId: st
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <h3 className="font-sans text-lg font-bold text-ink">{WEEKDAY_NAMES[d]}</h3>
                 <label className="inline-flex min-h-11 cursor-pointer items-center gap-3">
-                  <span className={cn("text-sm font-semibold", working ? "text-green" : "text-muted")}>{working ? "Working" : "Closed"}</span>
+                  <span className={cn("text-sm font-semibold", working ? "text-navy" : "text-muted")}>{working ? "Working" : "Closed"}</span>
                   <input
                     type="checkbox"
                     role="switch"
@@ -66,7 +66,7 @@ export function ScheduleEditor({ doctorId, doctorName, initial }: { doctorId: st
                     onChange={(e) => update(d, () => (e.target.checked ? [{ ...DEFAULT_SESSION }, { startTime: "17:00", endTime: "20:00", slotMinutes: 30 }] : []))}
                     className="peer sr-only"
                   />
-                  <span aria-hidden="true" className={cn("relative h-7 w-12 rounded-full transition-colors peer-focus-visible:ring-4 peer-focus-visible:ring-teal-soft", working ? "bg-green" : "bg-line")}>
+                  <span aria-hidden="true" className={cn("relative h-7 w-12 rounded-full transition-colors peer-focus-visible:ring-4 peer-focus-visible:ring-teal-soft", working ? "bg-navy" : "bg-line")}>
                     <span className={cn("absolute top-1 size-5 rounded-full bg-white shadow transition-transform", working ? "translate-x-6" : "translate-x-1")} />
                   </span>
                   <span className="sr-only">{WEEKDAY_NAMES[d]} is a working day</span>
@@ -75,7 +75,7 @@ export function ScheduleEditor({ doctorId, doctorName, initial }: { doctorId: st
               {working && (
                 <div className="mt-3 space-y-2">
                   {sessions.map((s, i) => (
-                    <div key={i} className="flex flex-wrap items-end gap-2 rounded-xl bg-cream p-3">
+                    <div key={i} className="flex flex-wrap items-end gap-2 rounded-xl bg-soft p-3">
                       <label className="text-sm">
                         <span className="block font-semibold">From</span>
                         <input type="time" step={300} value={s.startTime} onChange={(e) => update(d, (all) => all.map((x, j) => (j === i ? { ...x, startTime: e.target.value } : x)))} className="min-h-11 rounded-lg border border-line bg-white px-2" />
@@ -107,7 +107,7 @@ export function ScheduleEditor({ doctorId, doctorName, initial }: { doctorId: st
         })}
       </ul>
       <div className="sticky bottom-0 -mx-4 mt-4 flex items-center justify-end gap-3 border-t border-line bg-white px-4 pt-4 pb-1 sm:-mx-6 sm:px-6">
-        {dirty && <span className="text-sm text-warning">Unsaved changes</span>}
+        {dirty && <span className="text-sm text-amber">Unsaved changes</span>}
         <Button onClick={save} loading={pending === "schedule"} loadingText="Saving…" disabled={!dirty}>
           Save working hours
         </Button>

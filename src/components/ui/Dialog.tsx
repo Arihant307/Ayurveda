@@ -59,7 +59,7 @@ export function Dialog({
       }}
       aria-labelledby={titleId}
       className={cn(
-        "m-0 max-h-none max-w-none bg-transparent p-0 backdrop:bg-green-deep/40 backdrop:backdrop-blur-[2px]",
+        "m-0 max-h-none max-w-none bg-transparent p-0 backdrop:bg-navy-dark/40 backdrop:backdrop-blur-[2px]",
         variant === "modal" && "fixed inset-0 m-auto h-fit w-[calc(100%-2rem)]",
         variant === "modal" && size === "sm" && "sm:max-w-md",
         variant === "modal" && size === "md" && "sm:max-w-lg",
@@ -70,14 +70,14 @@ export function Dialog({
       {open && (
         <div
           className={cn(
-            "flex flex-col bg-cream text-ink shadow-lift",
+            "flex flex-col bg-soft text-ink shadow-lift",
             variant === "modal" && "max-h-[calc(100dvh-2rem)] rounded-[var(--radius-card)] animate-fade-up",
             variant === "drawer" && "h-full animate-fade-in sm:rounded-l-[var(--radius-card)]",
           )}
         >
           <div className="flex items-start justify-between gap-4 border-b border-line px-5 py-4 sm:px-6">
             <div className="min-w-0">
-              <h2 id={titleId} className="font-serif text-2xl font-semibold text-green">
+              <h2 id={titleId} className="font-serif text-2xl font-semibold text-navy">
                 {title}
               </h2>
               {description && <div className="mt-1 text-[0.95rem] text-muted">{description}</div>}
@@ -85,7 +85,7 @@ export function Dialog({
             <button
               type="button"
               onClick={onClose}
-              className="-mr-2 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-green-soft hover:text-green"
+              className="-mr-2 flex size-11 shrink-0 items-center justify-center rounded-full text-muted hover:bg-navy-soft hover:text-navy"
               aria-label="Close"
             >
               <X className="size-5" aria-hidden="true" />

@@ -15,7 +15,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
         <h1 className="mt-3 text-4xl">We couldn’t load this page</h1>
         <p className="mt-4 text-muted">
           Please try again in a moment. If you were booking, you can also call us on{" "}
-          <a href={CLINIC.phoneHref} className="font-semibold text-green underline underline-offset-4">{CLINIC.phoneDisplay}</a>.
+          <a href={CLINIC.phoneHref} className="font-semibold text-navy underline underline-offset-4">{CLINIC.phoneDisplay}</a>.
         </p>
         <Button className="mt-8" onClick={reset}>
           Try again

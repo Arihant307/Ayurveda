@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <main id="main" className="flex flex-1 items-center justify-center px-5 py-24">
       <div className="text-center">
-        <LeafSprig className="mx-auto h-28 text-teal-deep opacity-60" />
+        <LeafSprig className="mx-auto h-28 text-teal-dark opacity-60" />
         <p className="eyebrow mt-4">Page not found</p>
         <h1 className="mt-3 text-5xl">This path has wandered off</h1>
         <p className="mx-auto mt-4 max-w-md text-lg text-muted">The page you’re looking for doesn’t exist or may have moved.</p>
@@ -17,7 +17,7 @@ export default function NotFound() {
           </LinkButton>
         </div>
         <p className="mt-6 text-sm text-muted">
-          Or visit <Link href="/treatments" className="font-semibold text-green underline underline-offset-4">our treatments</Link>.
+          Or visit <Link href="/treatments" className="font-semibold text-navy underline underline-offset-4">our treatments</Link>.
         </p>
       </div>
     </main>

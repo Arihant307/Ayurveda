@@ -64,13 +64,13 @@ export default async function CalendarPage({ searchParams }: { searchParams: Pro
 
       <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-center gap-2">
-          <Link href={href({ date: addDays(date, -step) })} className="flex size-11 items-center justify-center rounded-full border border-line bg-white text-green hover:bg-green-soft" aria-label={view === "day" ? "Previous day" : "Previous week"}>
+          <Link href={href({ date: addDays(date, -step) })} className="flex size-11 items-center justify-center rounded-full border border-line bg-white text-navy hover:bg-navy-soft" aria-label={view === "day" ? "Previous day" : "Previous week"}>
             <ChevronLeft className="size-5" aria-hidden="true" />
           </Link>
           <Link href={href({ date: today })} className={buttonClasses("outline", "sm")}>
             Today
           </Link>
-          <Link href={href({ date: addDays(date, step) })} className="flex size-11 items-center justify-center rounded-full border border-line bg-white text-green hover:bg-green-soft" aria-label={view === "day" ? "Next day" : "Next week"}>
+          <Link href={href({ date: addDays(date, step) })} className="flex size-11 items-center justify-center rounded-full border border-line bg-white text-navy hover:bg-navy-soft" aria-label={view === "day" ? "Next day" : "Next week"}>
             <ChevronRight className="size-5" aria-hidden="true" />
           </Link>
           <h2 className="ml-2 font-serif text-2xl font-semibold" aria-live="polite">
@@ -84,7 +84,7 @@ export default async function CalendarPage({ searchParams }: { searchParams: Pro
                 key={v}
                 href={href({ view: v })}
                 aria-current={view === v ? "page" : undefined}
-                className={cn("rounded-full px-4 py-1.5 text-sm font-semibold capitalize", view === v ? "bg-green text-white" : "text-green hover:bg-green-soft")}
+                className={cn("rounded-full px-4 py-1.5 text-sm font-semibold capitalize", view === v ? "bg-navy text-white" : "text-navy hover:bg-navy-soft")}
               >
                 {v}
               </Link>
@@ -119,7 +119,7 @@ export default async function CalendarPage({ searchParams }: { searchParams: Pro
 }
 
 const chip = (active: boolean) =>
-  cn("rounded-full border px-3 py-1.5 text-sm font-semibold", active ? "border-green bg-green-soft text-green-deep" : "border-line bg-white text-ink hover:border-teal-deep");
+  cn("rounded-full border px-3 py-1.5 text-sm font-semibold", active ? "border-navy bg-navy-soft text-navy-dark" : "border-line bg-white text-ink hover:border-teal-dark");
 
 function Legend() {
   return (
@@ -156,10 +156,10 @@ function WeekView({ from, today, items, dayHref, open }: { from: string; today: 
       {days.map((d) => {
         const dayItems = items.filter((a) => a.date === d);
         return (
-          <section key={d} aria-label={formatDateStringLong(d)} className={cn("min-h-28 rounded-2xl border bg-white p-2.5", d === today ? "border-green ring-2 ring-green/20" : "border-line/70")}>
-            <Link href={dayHref(d)} className="mb-2 flex items-baseline justify-between gap-1 rounded-md px-1 hover:bg-green-soft">
+          <section key={d} aria-label={formatDateStringLong(d)} className={cn("min-h-28 rounded-2xl border bg-white p-2.5", d === today ? "border-navy ring-2 ring-navy/20" : "border-line/70")}>
+            <Link href={dayHref(d)} className="mb-2 flex items-baseline justify-between gap-1 rounded-md px-1 hover:bg-navy-soft">
               <span className="text-sm font-bold uppercase text-muted">{WEEKDAY_SHORT[weekdayOf(d)]}</span>
-              <span className={cn("font-serif text-2xl font-semibold", d === today ? "text-green" : "text-ink")}>{Number(d.slice(8))}</span>
+              <span className={cn("font-serif text-2xl font-semibold", d === today ? "text-navy" : "text-ink")}>{Number(d.slice(8))}</span>
             </Link>
             {dayItems.length === 0 ? (
               <p className="px-1 text-xs text-muted">No appointments</p>
@@ -208,7 +208,7 @@ function DayView({
   return (
     <div className="overflow-x-auto rounded-[var(--radius-card)] border border-line/70 bg-white shadow-soft">
       <table className="w-full min-w-[20rem] table-fixed text-sm">
-        <thead className="border-b border-line bg-cream">
+        <thead className="border-b border-line bg-soft">
           <tr>
             <th scope="col" className="w-20 px-2 py-3 text-left text-muted">Time</th>
             {doctors.map((d) => (
@@ -227,7 +227,7 @@ function DayView({
               {doctors.map((d) => {
                 const cell = items.filter((a) => a.doctor.id === d.id && timeToMinutes(a.time) >= m && timeToMinutes(a.time) < m + rowStep);
                 return (
-                  <td key={d.id} className={cn("px-1.5 py-1 align-top", !inSession(d.id, m) && "bg-cream-deep/50")}>
+                  <td key={d.id} className={cn("px-1.5 py-1 align-top", !inSession(d.id, m) && "bg-soft/50")}>
                     <div className="space-y-1">
                       {cell.map((a) => (
                         <Block key={a.id} a={a} showDoctor={false} open={open} />

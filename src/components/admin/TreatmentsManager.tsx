@@ -73,14 +73,14 @@ export function TreatmentsManager({ treatments }: { treatments: TreatmentRow[] }
         <ul className="grid gap-3 lg:grid-cols-2">
           {treatments.map((t) => (
             <li key={t.id} className="flex gap-4 rounded-[var(--radius-card)] border border-line/70 bg-white p-4 shadow-soft">
-              <div className="relative aspect-[4/3] w-24 shrink-0 overflow-hidden rounded-xl bg-green-soft">
+              <div className="relative aspect-[4/3] w-24 shrink-0 overflow-hidden rounded-xl bg-navy-soft">
                 <Image src={t.imageUrl || "/images/placeholders/treatment-1.svg"} alt="" fill sizes="96px" className="object-cover" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <h2 className="text-2xl">{t.name}</h2>
-                  {t.isVisible ? <Badge tone="green">Visible</Badge> : <Badge tone="danger">Hidden</Badge>}
-                  {t.isFeatured && <Badge tone="saffron"><Star className="size-3" aria-hidden="true" /> Featured</Badge>}
+                  {t.isVisible ? <Badge tone="teal">Visible</Badge> : <Badge tone="danger">Hidden</Badge>}
+                  {t.isFeatured && <Badge tone="accent"><Star className="size-3" aria-hidden="true" /> Featured</Badge>}
                 </div>
                 <p className="line-clamp-2 text-sm text-muted">{t.shortDescription}</p>
                 <div className="mt-3 flex flex-wrap gap-2">

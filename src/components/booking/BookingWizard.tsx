@@ -273,9 +273,9 @@ export function BookingWizard({
                 <span
                   className={cn(
                     "flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-colors duration-300",
-                    done && "bg-green text-white",
-                    current && "bg-teal-soft text-green-deep ring-2 ring-green",
-                    !done && !current && "bg-cream-deep text-muted",
+                    done && "bg-navy text-white",
+                    current && "bg-teal-soft text-navy-dark ring-2 ring-navy",
+                    !done && !current && "bg-soft text-muted",
                   )}
                 >
                   {done ? <Check className="size-4" aria-hidden="true" /> : i + 1}
@@ -284,11 +284,11 @@ export function BookingWizard({
                     {done ? " (completed)" : current ? " (current step)" : ""}
                   </span>
                 </span>
-                <span className={cn("hidden text-sm font-semibold sm:inline", current ? "text-green" : "text-muted")} aria-hidden="true">
+                <span className={cn("hidden text-sm font-semibold sm:inline", current ? "text-navy" : "text-muted")} aria-hidden="true">
                   {s.label}
                 </span>
                 {i < STEPS.length - 1 && (
-                  <span className={cn("h-0.5 flex-1 rounded-full transition-colors duration-300", done ? "bg-green" : "bg-line")} aria-hidden="true" />
+                  <span className={cn("h-1 flex-1 rounded-full transition-colors duration-300", done ? "bg-accent-gradient" : "bg-line")} aria-hidden="true" />
                 )}
               </li>
             );
@@ -301,7 +301,7 @@ export function BookingWizard({
           <button
             type="button"
             onClick={back}
-            className="-ml-2 flex size-11 shrink-0 items-center justify-center rounded-full text-green hover:bg-green-soft"
+            className="-ml-2 flex size-11 shrink-0 items-center justify-center rounded-full text-navy hover:bg-navy-soft"
             aria-label="Go back to the previous step"
           >
             <ArrowLeft className="size-5" aria-hidden="true" />
@@ -339,7 +339,7 @@ export function BookingWizard({
                     className={cn(
                       "flex cursor-pointer items-center gap-4 rounded-[var(--radius-card)] border-2 bg-white p-4 transition-all duration-200",
                       "has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-teal-soft hover:-translate-y-0.5 hover:shadow-soft",
-                      checked ? "border-green shadow-soft" : "border-line",
+                      checked ? "border-navy shadow-soft" : "border-line",
                     )}
                   >
                     <input
@@ -356,18 +356,18 @@ export function BookingWizard({
                       }
                       className="sr-only"
                     />
-                    <span className="relative size-16 shrink-0 overflow-hidden rounded-2xl bg-green-soft">
+                    <span className="relative size-16 shrink-0 overflow-hidden rounded-2xl bg-navy-soft">
                       <Image src={d.photoUrl || "/images/placeholders/doctor.svg"} alt="" fill sizes="64px" className="object-cover" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block font-serif text-2xl font-semibold text-green">{d.name}</span>
+                      <span className="block font-serif text-2xl font-semibold text-navy">{d.name}</span>
                       {d.qualification && <span className="block text-sm font-semibold text-navy">{d.qualification}</span>}
                       {d.specialization && <span className="block text-sm text-muted">{d.specialization}</span>}
                     </span>
                     <span
                       className={cn(
                         "flex size-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-                        checked ? "border-green bg-green text-white" : "border-line",
+                        checked ? "border-navy bg-navy text-white" : "border-line",
                       )}
                       aria-hidden="true"
                     >
@@ -572,8 +572,8 @@ export function BookingWizard({
             </div>
             <p className="mt-4 text-sm text-muted">
               By confirming, you agree to our{" "}
-              <a href="/terms" className="font-semibold text-green underline underline-offset-4">terms</a> and{" "}
-              <a href="/privacy" className="font-semibold text-green underline underline-offset-4">privacy policy</a>. Our team may call
+              <a href="/terms" className="font-semibold text-navy underline underline-offset-4">terms</a> and{" "}
+              <a href="/privacy" className="font-semibold text-navy underline underline-offset-4">privacy policy</a>. Our team may call
               you to confirm.
             </p>
             <StepActions>
@@ -597,7 +597,7 @@ export function BookingWizard({
 
 function StepActions({ children }: { children: React.ReactNode }) {
   return (
-    <div className="sticky bottom-0 z-10 -mx-5 mt-8 flex items-center justify-end gap-3 border-t border-line bg-cream/95 px-5 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:p-0">
+    <div className="sticky bottom-0 z-10 -mx-5 mt-8 flex items-center justify-end gap-3 border-t border-line bg-white/95 px-5 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:p-0">
       {children}
     </div>
   );
@@ -608,7 +608,7 @@ function ReviewBlock({ title, onEdit, editLabel, children }: { title: string; on
     <section className="p-5 sm:p-6" aria-label={title}>
       <div className="mb-3 flex items-center justify-between gap-3">
         <h3 className="text-2xl">{title}</h3>
-        <button type="button" onClick={onEdit} className="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 text-sm font-semibold text-green hover:bg-green-soft" aria-label={editLabel}>
+        <button type="button" onClick={onEdit} className="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 text-sm font-semibold text-navy hover:bg-navy-soft" aria-label={editLabel}>
           <Pencil className="size-4" aria-hidden="true" /> Edit
         </button>
       </div>

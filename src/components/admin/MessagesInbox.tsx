@@ -22,10 +22,10 @@ export function MessagesInbox({ messages }: { messages: MessageRow[] }) {
     <>
       <ul className="space-y-3">
         {messages.map((m) => (
-          <li key={m.id} className={cn("rounded-[var(--radius-card)] border bg-white p-4 shadow-soft sm:p-5", m.isRead ? "border-line/70" : "border-saffron ring-2 ring-saffron/30")}>
+          <li key={m.id} className={cn("rounded-[var(--radius-card)] border bg-white p-4 shadow-soft sm:p-5", m.isRead ? "border-line/70" : "border-teal ring-2 ring-teal/30")}>
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="font-sans text-lg font-bold text-ink">{m.name}</h2>
-              {!m.isRead && <Badge tone="saffron">New</Badge>}
+              {!m.isRead && <Badge tone="accent">New</Badge>}
               <span className="ml-auto text-sm text-muted">{formatDateTime(new Date(m.createdAt))}</span>
             </div>
             {m.subject && <p className="mt-1 font-semibold">{m.subject}</p>}

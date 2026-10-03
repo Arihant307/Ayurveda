@@ -137,6 +137,20 @@ scripts/              screenshot + end-to-end smoke scripts (Playwright)
 - Every status change and reschedule is written to `AppointmentLog` with the staff member's name, and is shown in the appointment drawer.
 - **Uploaded images** are stored in Postgres (the `Upload` table), are limited to 3 MB, and are served with long-lived cache headers from `/api/uploads/[id]`. No extra storage service is needed.
 
+### Colour theme
+All colours come from the Kumar Ayurveda logo and are defined once, as CSS variables in `src/app/globals.css`, which are mapped to Tailwind classes such as `bg-navy`, `text-teal-dark` and `bg-soft`. Components use only those classes.
+
+| Token | Hex | Used for |
+|---|---|---|
+| `navy` / `navy-dark` | #061685 / #040E5C | primary buttons, headings, navigation, footer, admin sidebar, selected date/time · hover |
+| `teal` / `teal-dark` | #0DC0B2 / #077A71 | secondary buttons, icons, botanical decoration, available dates/slots · teal text, links, focus rings |
+| `magenta` → `violet` | #E01993 → #5B1BCA | accent gradient only (`bg-accent-gradient`, `text-accent-gradient`): heading underlines, hero highlight words, booking progress, confirmation tick, badge dots |
+| `white` / `soft` | #FFFFFF / #F5F7FF | page background / alternate sections and cards |
+| `ink` / `muted` | #1A1F3D / #50567A | body text / secondary text |
+| `amber`, `danger` | — | admin statuses only (Pending = amber, Confirmed = navy, Completed = teal, Cancelled = red) |
+
+All text pairs meet WCAG AA. White text on magenta is only 4.44:1, so gradient badges use navy text with a gradient dot instead. Emails, the Open Graph image and the root error page can't read CSS variables, so they repeat these hex values. Each of those places has a comment pointing back to `globals.css`.
+
 ### Verification scripts
 ```bash
 # Screenshots at 360/768/1280/1536 px, plus reports of console errors and horizontal overflow
@@ -150,7 +164,7 @@ These need a Chromium for Playwright. Set `CHROMIUM_PATH` to use an installed br
 
 ## 6. Things the clinic should replace or confirm
 
-- **Logo:** the brand image was **not available** while this was built. `public/brand/logo.svg` and `public/brand/logo-on-dark.svg` are clearly labelled *placeholder* wordmarks, and `src/app/icon.svg` is a placeholder favicon. Replace them with the real logo, cut out on a transparent background, plus a white-text variant for green backgrounds. Keep the same file names, or edit `src/lib/constants/brand.ts`, and set the real width and height there. Don't redraw or recolour the logo.
+- **Logo:** the brand image was **not available** while this was built. `public/brand/logo.svg` and `public/brand/logo-on-dark.svg` are clearly labelled *placeholder* wordmarks, and `src/app/icon.svg` is a placeholder favicon. Replace them with the real logo, cut out on a transparent background, plus a white-text variant for navy backgrounds (footer and admin sidebar). Keep the same file names, or edit `src/lib/constants/brand.ts`, and set the real width and height there. Don't redraw or recolour the logo.
 - **Photos:** everything in `public/images/placeholders/` is a placeholder labelled "PHOTO PLACEHOLDER". Upload doctor and treatment photos in the admin. Replace `clinic.svg`, used on Home and About, with a real photo of the clinic.
 - **Doctor qualifications and experience** are deliberately left empty for the clinic to fill in under Admin → Doctors. The short bios and areas of expertise are neutral drafts; please review them.
 - **Map coordinates** in `src/lib/constants/clinic.ts` (`26.9118, 75.7426`) are an approximation of Amrapali Circle. Confirm them using the clinic's Google Maps pin.

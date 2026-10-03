@@ -79,10 +79,10 @@ export function SlotPicker({
       <div aria-busy="true" aria-label="Loading available times" className="space-y-6">
         {PERIODS.map((p) => (
           <div key={p.key}>
-            <div className="mb-3 h-5 w-24 animate-pulse rounded bg-cream-deep" />
+            <div className="mb-3 h-5 w-24 animate-pulse rounded bg-soft" />
             <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
               {Array.from({ length: 6 }, (_, i) => (
-                <div key={i} className="h-12 animate-pulse rounded-xl bg-cream-deep" />
+                <div key={i} className="h-12 animate-pulse rounded-xl bg-soft" />
               ))}
             </div>
           </div>
@@ -108,7 +108,7 @@ export function SlotPicker({
         return (
           <div key={key} role="group" aria-labelledby={`period-${key}`}>
             <h3 id={`period-${key}`} className="mb-3 flex items-center gap-2 font-sans text-sm font-bold uppercase tracking-[0.12em] text-muted">
-              <Icon className="size-4 text-teal-deep" aria-hidden="true" />
+              <Icon className="size-4 text-teal-dark" aria-hidden="true" />
               {label}
               <span className="font-normal normal-case tracking-normal">· {group.length} available</span>
             </h3>
@@ -121,7 +121,7 @@ export function SlotPicker({
                     className={cn(
                       "flex min-h-12 cursor-pointer items-center justify-center rounded-xl border-2 text-[0.975rem] font-semibold transition-all duration-150",
                       "has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-teal-soft active:scale-[0.97]",
-                      checked ? "border-green bg-green text-white shadow-soft" : "border-line bg-white text-green-deep hover:border-teal-deep",
+                      checked ? "border-navy bg-navy text-white shadow-soft" : "border-teal/60 bg-white text-teal-dark hover:border-teal-dark hover:bg-teal-soft",
                     )}
                   >
                     <input

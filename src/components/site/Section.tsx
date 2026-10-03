@@ -5,13 +5,13 @@ export function Section({
   id,
   className,
   children,
-  tone = "cream",
+  tone = "white",
   labelledBy,
 }: {
   id?: string;
   className?: string;
   children: ReactNode;
-  tone?: "cream" | "white" | "deep" | "green";
+  tone?: "white" | "soft" | "navy";
   labelledBy?: string;
 }) {
   return (
@@ -21,8 +21,8 @@ export function Section({
       className={cn(
         "relative py-16 md:py-24",
         tone === "white" && "bg-white",
-        tone === "deep" && "bg-cream-deep",
-        tone === "green" && "bg-green text-white",
+        tone === "soft" && "bg-soft",
+        tone === "navy" && "bg-navy text-white",
         className,
       )}
     >
@@ -54,8 +54,9 @@ export function SectionHeading({
       <Tag id={id} className={cn("text-[2.15rem] sm:text-[2.6rem] md:text-5xl", onDark && "text-white")}>
         {title}
       </Tag>
+      <span className={cn("mt-4 block h-1 w-14 rounded-full bg-accent-gradient", align === "center" && "mx-auto")} aria-hidden="true" />
       {children && (
-        <div className={cn("mt-4 text-lg", onDark ? "text-on-green-muted" : "text-muted")}>{children}</div>
+        <div className={cn("mt-4 text-lg", onDark ? "text-on-navy-muted" : "text-muted")}>{children}</div>
       )}
     </div>
   );
@@ -74,7 +75,7 @@ export function PageHero({
   aside?: ReactNode;
 }) {
   return (
-    <div className="relative overflow-hidden border-b border-line/70 bg-cream-deep">
+    <div className="relative overflow-hidden border-b border-line/70 bg-soft">
       <div className="container-site relative grid gap-8 py-14 md:grid-cols-[1.4fr_1fr] md:items-center md:py-20">
         <div>
           {eyebrow && <p className="eyebrow mb-3 animate-fade-up">{eyebrow}</p>}
