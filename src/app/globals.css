@@ -185,13 +185,21 @@
     .lift:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
   }
 
-  /* Scroll reveal: content is visible by default; JS adds .reveal-armed to animate. */
-  .reveal-armed [data-reveal] {
-    opacity: 0;
-    transform: translateY(14px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Scroll reveal, pure CSS (scroll-driven animation): elements marked data-reveal fade up
+     as they enter the viewport. No JavaScript touches the DOM, so React hydration can never
+     see a mismatch. Browsers without animation-timeline simply show the content. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      [data-reveal] {
+        animation: fade-up linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 35%;
+      }
+    }
   }
-  .reveal-armed [data-reveal].is-visible { opacity: 1; transform: none; }
+  @media print {
+    [data-reveal] { animation: none; }
+  }
 
   .draw-check {
     stroke-dasharray: 48;
@@ -207,6 +215,5 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal-armed [data-reveal] { opacity: 1; transform: none; }
   .draw-check { stroke-dashoffset: 0; }
 }

@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { bodyFont, devanagariFont, headingFont } from "./fonts";
 import { CLINIC, siteUrl } from "@/lib/constants/clinic";
-import { RevealObserver } from "@/components/ui/Reveal";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -31,7 +30,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="flex min-h-dvh flex-col">
         {children}
-        <RevealObserver />
       </body>
     </html>
   );
