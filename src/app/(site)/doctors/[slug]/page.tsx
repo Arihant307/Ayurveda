@@ -10,7 +10,7 @@ import { breadcrumbJsonLd, pageMetadata, physicianJsonLd } from "@/lib/seo";
 import { AnchorButton, LinkButton } from "@/components/ui/Button";
 import { DoctorPhoto } from "@/components/site/DoctorCard";
 import { JsonLd } from "@/components/site/JsonLd";
-import { Mandala } from "@/components/site/Botanical";
+import { PlusMark } from "@/components/site/Botanical";
 
 export const revalidate = 300;
 
@@ -44,8 +44,8 @@ export default async function DoctorPage({ params }: Props) {
           ]),
         ]}
       />
-      <div className="relative overflow-hidden bg-soft">
-        <Mandala className="absolute -right-32 -top-32 size-96 text-teal opacity-25" />
+      <div className="glow-soft relative overflow-hidden">
+        <PlusMark variant="outline" className="absolute -right-24 -top-24 size-96 text-teal/25" />
         <div className="container-site relative py-8 md:py-14">
           <Link href="/doctors" className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-navy hover:underline underline-offset-4">
             <ChevronLeft className="size-4" aria-hidden="true" /> All doctors

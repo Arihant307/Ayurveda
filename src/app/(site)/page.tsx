@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarCheck, HeartHandshake, Leaf, Phone, ShieldCheck, Sparkles, Stethoscope, Users } from "lucide-react";
+import { ArrowRight, CalendarCheck, Clock, HeartHandshake, Leaf, MapPin, Phone, ShieldCheck, Sparkles, Stethoscope, Users } from "lucide-react";
 import { CLINIC } from "@/lib/constants/clinic";
 import { getActiveDoctors, getClinicHours, getPublishedTestimonials, getVisibleTreatments } from "@/lib/db/queries";
 import { pageMetadata } from "@/lib/seo";
 import { AnchorButton, LinkButton } from "@/components/ui/Button";
-import { LeafSprig, Mandala, Wave } from "@/components/site/Botanical";
+import { LeafSprig, PlusMark, Wave } from "@/components/site/Botanical";
+import { formatDayGroup } from "@/lib/format";
+import { formatTimeString } from "@/lib/datetime";
 import { Section, SectionHeading } from "@/components/site/Section";
 import { DoctorCard } from "@/components/site/DoctorCard";
 import { TreatmentCard } from "@/components/site/TreatmentCard";
@@ -56,6 +58,13 @@ export default async function HomePage() {
     getPublishedTestimonials(),
     getClinicHours(),
   ]);
+  // "Mon – Sat · 10:00 AM – 8:00 PM", derived from the schedules (first group with working hours).
+  const openGroup = hours.groups.find((g) => g.sessions.length > 0);
+  const openSummary = openGroup
+    ? `${formatDayGroup(openGroup.days, true)} · ${formatTimeString(openGroup.sessions[0].startTime)} – ${formatTimeString(
+        openGroup.sessions[openGroup.sessions.length - 1].endTime,
+      )}`
+    : null;
   // Featured first, topped up with others so the grid fills evenly (Panchakarma has its own section).
   const pool = treatments.filter((t) => t.slug !== "panchakarma");
   const featured = [...pool.filter((t) => t.isFeatured), ...pool.filter((t) => !t.isFeatured)].slice(0, pool.length >= 6 ? 6 : 3);
@@ -63,16 +72,14 @@ export default async function HomePage() {
   return (
     <>
       {/* ───────── Hero ───────── */}
-      <section aria-labelledby="hero-title" className="relative overflow-hidden">
+      <section aria-labelledby="hero-title" className="glow-hero relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-          <Mandala className="absolute -right-40 -top-32 size-[34rem] text-teal opacity-30 md:-right-24" />
-          <LeafSprig animated className="absolute -bottom-6 right-[6%] hidden h-[22rem] text-teal opacity-40 lg:block" />
           <LeafSprig animated className="absolute -left-10 bottom-10 h-48 -scale-x-100 text-teal-dark opacity-15 [animation-delay:-4s]" />
         </div>
-        <div className="container-site relative grid items-center gap-12 pb-16 pt-10 md:pb-24 md:pt-16 lg:grid-cols-[1.15fr_1fr]">
+        <div className="container-site relative grid items-center gap-14 pb-20 pt-10 md:pb-28 md:pt-16 lg:grid-cols-[1.15fr_1fr]">
           <div>
             <p className="eyebrow animate-fade-up">Ayurveda &amp; Panchakarma · Vaishali Nagar, Jaipur</p>
-            <h1 id="hero-title" className="mt-4 text-[2.75rem] leading-[1.02] sm:text-6xl lg:text-[4.4rem] animate-fade-up [animation-delay:60ms]">
+            <h1 id="hero-title" className="mt-5 text-[2.75rem] leading-[1.02] sm:text-6xl lg:text-[4.6rem] animate-fade-up [animation-delay:60ms]">
               Holistic wellness, <span className="italic text-accent-gradient pr-1">rooted</span> in classical Ayurveda
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted md:text-xl animate-fade-up [animation-delay:120ms]">
@@ -87,28 +94,51 @@ export default async function HomePage() {
                 Call Now
               </AnchorButton>
             </div>
-            <p className="mt-5 text-sm text-muted animate-fade-up [animation-delay:220ms]">
-              <span lang="sa" className="font-deva">स्वस्थस्य स्वास्थ्य रक्षणम्</span> — “to protect the health of the healthy” (Charaka Samhita)
+            <ul className="mt-9 flex flex-wrap gap-x-6 gap-y-3 text-[0.95rem] text-ink animate-fade-up [animation-delay:220ms]" aria-label="At a glance">
+              {openSummary && (
+                <li className="flex items-center gap-2">
+                  <Clock className="size-4 text-teal-dark" aria-hidden="true" /> {openSummary}
+                </li>
+              )}
+              <li className="flex items-center gap-2">
+                <Stethoscope className="size-4 text-teal-dark" aria-hidden="true" /> {doctors.length} Ayurvedic physicians
+              </li>
+              <li className="flex items-center gap-2">
+                <MapPin className="size-4 text-teal-dark" aria-hidden="true" /> Vaishali Nagar, Jaipur
+              </li>
+            </ul>
+            <p className="mt-6 border-l-2 border-teal pl-3 text-sm text-muted animate-fade-up [animation-delay:260ms]">
+              <span lang="sa" className="font-deva text-[0.95rem] text-navy">स्वस्थस्य स्वास्थ्य रक्षणम्</span> — “to protect the health of the healthy” (Charaka Samhita)
             </p>
           </div>
           <div className="relative mx-auto w-full max-w-md lg:max-w-none animate-fade-up [animation-delay:120ms]">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem_2.5rem_10rem_2.5rem] bg-navy-soft shadow-lift">
-              <Image
-                src="/images/placeholders/clinic.svg"
-                alt="Inside Kumar Ayurveda clinic"
-                fill
-                priority
-                sizes="(min-width: 1024px) 480px, 90vw"
-                className="object-cover"
-              />
+            <div className="dot-grid absolute -right-4 -top-6 hidden h-48 w-48 rounded-3xl sm:block" aria-hidden="true" />
+            <div className="frame-accent relative rounded-[2.6rem_2.6rem_10rem_2.6rem] shadow-lift">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[2.45rem_2.45rem_9.85rem_2.45rem] bg-navy-soft">
+                <Image
+                  src="/images/placeholders/clinic.svg"
+                  alt="Inside Kumar Ayurveda clinic"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 480px, 90vw"
+                  className="object-cover"
+                />
+              </div>
             </div>
-            <div className="absolute -bottom-5 left-4 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lift sm:-left-6">
+            <div className="absolute -bottom-6 left-4 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lift ring-1 ring-line sm:-left-8">
               <span className="flex size-10 items-center justify-center rounded-full bg-teal-soft text-teal-dark">
                 <Leaf className="size-5" aria-hidden="true" />
               </span>
               <span className="text-sm leading-tight">
-                <span className="block font-semibold text-navy">{doctors.length} Ayurvedic physicians</span>
-                <span className="text-muted">Personal consultations</span>
+                <span className="block font-semibold text-navy">Unhurried consultations</span>
+                <span className="text-muted">One-to-one with your doctor</span>
+              </span>
+            </div>
+            <div className="absolute -right-2 top-10 hidden items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-lift ring-1 ring-line sm:flex lg:-right-8">
+              <PlusMark id="hero-chip-plus" className="size-7" />
+              <span className="text-sm leading-tight">
+                <span className="block font-semibold text-navy">Panchakarma</span>
+                <span className="text-muted">Planned just for you</span>
               </span>
             </div>
           </div>
@@ -145,11 +175,15 @@ export default async function HomePage() {
           </SectionHeading>
           <ol className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {PHILOSOPHY.map((p, i) => (
-              <li key={p.title} data-reveal style={{ transitionDelay: `${i * 70}ms` }} className="relative rounded-[var(--radius-card)] border border-line/70 bg-white p-6">
-                <span className="font-serif text-4xl font-semibold text-teal" aria-hidden="true">
+              <li
+                key={p.title}
+                data-reveal
+                className="card-accent lift overflow-hidden rounded-[var(--radius-card)] border border-line/70 bg-white p-6 shadow-soft"
+              >
+                <span className="text-accent-gradient font-serif text-5xl font-semibold leading-none" aria-hidden="true">
                   0{i + 1}
                 </span>
-                <h3 className="mt-2 text-2xl">{p.title}</h3>
+                <h3 className="mt-4 text-2xl">{p.title}</h3>
                 <p className="mt-2 text-muted">{p.text}</p>
               </li>
             ))}
@@ -179,8 +213,9 @@ export default async function HomePage() {
       {/* ───────── Panchakarma highlight ───────── */}
       <section aria-labelledby="pk-title" className="relative">
         <Wave className="text-navy" />
-        <div className="relative overflow-hidden bg-navy py-16 text-white md:py-24">
-          <Mandala className="absolute -left-32 top-10 size-96 text-teal opacity-25" />
+        <div className="glow-navy relative overflow-hidden py-16 text-white md:py-24">
+          <PlusMark variant="outline" className="absolute -bottom-40 -left-40 size-[22rem] text-white/[0.06]" />
+          <LeafSprig className="absolute -bottom-4 right-4 hidden h-56 text-teal opacity-25 lg:block" />
           <div className="container-site relative grid gap-12 lg:grid-cols-2 lg:items-center">
             <div>
               <SectionHeading id="pk-title" eyebrow="Signature programme" title="Panchakarma in Jaipur" onDark>
@@ -201,17 +236,26 @@ export default async function HomePage() {
             </div>
             <ol className="grid gap-3 sm:grid-cols-2">
               {PANCHAKARMA_THERAPIES.map((t, i) => (
-                <li key={t.name} data-reveal style={{ transitionDelay: `${i * 60}ms` }} className="rounded-2xl border border-white/15 bg-white/5 p-5">
-                  <p className="font-serif text-2xl font-semibold text-white">
-                    {t.name} <span lang="hi" className="ml-1 font-deva text-base font-normal text-on-navy-muted">{t.hindi}</span>
-                  </p>
-                  <p className="mt-1 text-[0.95rem] text-on-navy-muted">{t.short}</p>
+                <li
+                  key={t.name}
+                  data-reveal
+                  className="flex gap-4 rounded-2xl border border-white/15 bg-white/[0.06] p-5 transition-colors duration-300 hover:border-teal/60 hover:bg-white/10"
+                >
+                  <span className="font-serif text-3xl font-semibold leading-none text-teal" aria-hidden="true">
+                    0{i + 1}
+                  </span>
+                  <div>
+                    <p className="font-serif text-2xl font-semibold leading-tight text-white">
+                      {t.name} <span lang="hi" className="ml-1 font-deva text-base font-normal text-on-navy-muted">{t.hindi}</span>
+                    </p>
+                    <p className="mt-1 text-[0.95rem] text-on-navy-muted">{t.short}</p>
+                  </div>
                 </li>
               ))}
             </ol>
           </div>
         </div>
-        <Wave className="text-navy" flip />
+        <Wave className="text-navy-dark" flip />
       </section>
 
       {/* ───────── Doctors ───────── */}
@@ -233,9 +277,13 @@ export default async function HomePage() {
         <div className="container-site">
           <SectionHeading id="why-title" eyebrow="Why Kumar Ayurveda" title="Traditional wisdom, careful practice" />
           <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {WHY.map(({ Icon, title, text }, i) => (
-              <li key={title} data-reveal style={{ transitionDelay: `${i * 70}ms` }}>
-                <span className="flex size-12 items-center justify-center rounded-2xl bg-white text-teal-dark shadow-soft">
+            {WHY.map(({ Icon, title, text }) => (
+              <li
+                key={title}
+                data-reveal
+                className="group card-accent lift overflow-hidden rounded-[var(--radius-card)] border border-line/70 bg-white p-6 shadow-soft"
+              >
+                <span className="flex size-12 items-center justify-center rounded-2xl bg-teal-soft text-teal-dark transition-colors duration-300 group-hover:bg-navy group-hover:text-teal">
                   <Icon className="size-6" aria-hidden="true" />
                 </span>
                 <h3 className="mt-4 text-2xl">{title}</h3>

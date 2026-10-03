@@ -58,3 +58,49 @@ export function Wave({ className, flip = false }: { className?: string; flip?: b
     </svg>
   );
 }
+
+/**
+ * The rounded cross from the logo. `variant="gradient"` fills it with the logo's
+ * magenta→violet; `variant="outline"` draws it in currentColor (for watermarks).
+ * Colours come from the CSS tokens.
+ */
+export function PlusMark({
+  className,
+  variant = "gradient",
+  id = "plus-mark",
+}: {
+  className?: string;
+  variant?: "gradient" | "outline" | "solid";
+  /** Unique gradient id when several gradient marks are on one page. */
+  id?: string;
+}) {
+  const d = "M38 6h24a6 6 0 0 1 6 6v26h26a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6H68v26a6 6 0 0 1-6 6H38a6 6 0 0 1-6-6V68H6a6 6 0 0 1-6-6V38a6 6 0 0 1 6-6h26V12a6 6 0 0 1 6-6Z";
+  return (
+    <svg viewBox="-2 0 104 100" aria-hidden="true" className={cn("pointer-events-none", className)}>
+      {variant === "gradient" && (
+        <defs>
+          <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" style={{ stopColor: "var(--brand-magenta)" }} />
+            <stop offset="100%" style={{ stopColor: "var(--brand-violet)" }} />
+          </linearGradient>
+        </defs>
+      )}
+      <path
+        d={d}
+        fill={variant === "gradient" ? `url(#${id})` : variant === "solid" ? "currentColor" : "none"}
+        stroke={variant === "outline" ? "currentColor" : "none"}
+        strokeWidth={variant === "outline" ? 1.5 : 0}
+      />
+    </svg>
+  );
+}
+
+/** The logo's leaf, simplified (teal by default via currentColor). */
+export function LogoLeaf({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 120 70" aria-hidden="true" className={cn("pointer-events-none", className)}>
+      <path d="M4 22C30 2 78 0 116 50 82 64 36 62 4 22Z" fill="currentColor" />
+      <path d="M10 24C42 30 78 38 112 50" fill="none" stroke="white" strokeOpacity="0.55" strokeWidth="2.5" strokeLinecap="round" />
+    </svg>
+  );
+}

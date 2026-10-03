@@ -57,6 +57,7 @@ export function Header({ logo }: { logo: ReactNode }) {
       >
         Skip to content
       </a>
+      <div className="h-[3px] bg-accent-gradient" aria-hidden="true" />
       <div className="container-site flex h-[4.5rem] items-center justify-between gap-4 md:h-20">
         {logo}
 
@@ -74,7 +75,7 @@ export function Header({ logo }: { logo: ReactNode }) {
                 >
                   {link.label}
                   {isActive(link.href) && (
-                    <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-teal" aria-hidden="true" />
+                    <span className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-accent-gradient" aria-hidden="true" />
                   )}
                 </Link>
               </li>
@@ -113,7 +114,7 @@ export function Header({ logo }: { logo: ReactNode }) {
         id="mobile-menu"
         ref={panel}
         hidden={!open}
-        className="fixed inset-x-0 bottom-0 top-[4.5rem] z-40 overflow-y-auto bg-white md:top-20 lg:hidden"
+        className="fixed inset-x-0 bottom-0 top-[calc(4.5rem+3px)] z-40 overflow-y-auto bg-white md:top-[calc(5rem+3px)] lg:hidden"
       >
         <nav aria-label="Mobile" className="container-site flex min-h-full flex-col py-6 animate-fade-in">
           <ul className="divide-y divide-line border-y border-line">

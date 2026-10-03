@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { PlusMark } from "./Botanical";
 
 export function Section({
   id,
@@ -21,7 +22,7 @@ export function Section({
       className={cn(
         "relative py-16 md:py-24",
         tone === "white" && "bg-white",
-        tone === "soft" && "bg-soft",
+        tone === "soft" && "glow-soft",
         tone === "navy" && "bg-navy text-white",
         className,
       )}
@@ -75,11 +76,13 @@ export function PageHero({
   aside?: ReactNode;
 }) {
   return (
-    <div className="relative overflow-hidden border-b border-line/70 bg-soft">
+    <div className="glow-soft relative overflow-hidden border-b border-line/70">
+      <PlusMark variant="outline" className="absolute -right-24 -top-24 size-96 text-teal/25" />
       <div className="container-site relative grid gap-8 py-14 md:grid-cols-[1.4fr_1fr] md:items-center md:py-20">
         <div>
           {eyebrow && <p className="eyebrow mb-3 animate-fade-up">{eyebrow}</p>}
           <h1 className="text-[2.5rem] leading-[1.05] sm:text-5xl md:text-6xl animate-fade-up">{title}</h1>
+          <span className="mt-5 block h-1 w-16 rounded-full bg-accent-gradient animate-fade-up" aria-hidden="true" />
           {children && <div className="mt-5 max-w-2xl text-lg text-muted animate-fade-up [animation-delay:80ms]">{children}</div>}
         </div>
         {aside}

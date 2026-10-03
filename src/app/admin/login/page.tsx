@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { getCurrentAdmin } from "@/lib/auth";
 import { Logo } from "@/components/site/Logo";
 import { LoginForm } from "@/components/admin/LoginForm";
-import { Mandala } from "@/components/site/Botanical";
+import { PlusMark } from "@/components/site/Botanical";
 
 export const metadata = { title: "Sign in" };
 export const dynamic = "force-dynamic";
@@ -12,7 +12,7 @@ export default async function LoginPage() {
   if (await getCurrentAdmin()) redirect("/admin");
   return (
     <main id="main" className="relative flex flex-1 items-center justify-center overflow-hidden px-4 py-12">
-      <Mandala className="absolute -right-40 -top-40 size-[30rem] text-teal opacity-20" />
+      <PlusMark variant="outline" className="absolute -right-32 -top-32 size-[30rem] text-teal/30" />
       <div className="relative w-full max-w-md">
         <div className="mb-8 flex justify-center">
           <Logo href={null} priority className="h-24 w-auto" />

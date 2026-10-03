@@ -45,7 +45,7 @@ export default async function TreatmentPage({ params }: Props) {
           ]),
         ]}
       />
-      <div className="bg-soft">
+      <div className="glow-soft">
         <div className="container-site grid gap-10 py-8 md:grid-cols-2 md:items-center md:py-14">
           <div className="animate-fade-up">
             <Link href="/treatments" className="inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-navy hover:underline underline-offset-4">
@@ -68,15 +68,17 @@ export default async function TreatmentPage({ params }: Props) {
               </AnchorButton>
             </div>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem_2rem_6rem_2rem] bg-navy-soft shadow-lift animate-fade-up [animation-delay:80ms]">
-            <Image
-              src={treatment.imageUrl || TREATMENT_PLACEHOLDER}
-              alt={`${treatment.name} at Kumar Ayurveda`}
-              fill
-              priority
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover"
-            />
+          <div className="frame-accent rounded-[2.1rem_2.1rem_6.1rem_2.1rem] shadow-lift animate-fade-up [animation-delay:80ms]">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem_2rem_6rem_2rem] bg-navy-soft">
+              <Image
+                src={treatment.imageUrl || TREATMENT_PLACEHOLDER}
+                alt={`${treatment.name} at Kumar Ayurveda`}
+                fill
+                priority
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </div>
       </div>

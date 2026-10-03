@@ -12,7 +12,7 @@ const base =
   "disabled:opacity-60 disabled:active:scale-100 disabled:cursor-not-allowed";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-navy text-white shadow-soft hover:bg-navy-dark hover:shadow-lift",
+  primary: "bg-navy text-white shadow-navy hover:bg-navy-dark hover:-translate-y-0.5 hover:shadow-lift",
   secondary: "bg-teal text-navy-dark hover:bg-teal-dark hover:text-white",
   outline: "border-2 border-navy text-navy bg-transparent hover:bg-navy hover:text-white",
   ghost: "text-navy hover:bg-navy-soft",

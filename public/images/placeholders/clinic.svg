@@ -1,11 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900">
-  <!-- PLACEHOLDER image of the clinic interior. Replace with a real photo. -->
-  <rect width="1200" height="900" fill="#F5F7FF"/>
-  <circle cx="950" cy="180" r="260" fill="#0DC0B2" opacity="0.10"/>
-  <circle cx="200" cy="760" r="300" fill="#061685" opacity="0.07"/>
-  <rect x="300" y="300" width="600" height="380" rx="28" fill="#FFFFFF" stroke="#061685" stroke-opacity="0.25" stroke-width="3"/>
-  <path d="M600 640 C 600 520 630 430 690 360" fill="none" stroke="#061685" stroke-width="4" opacity="0.5"/>
-  <path d="M605 560 C 545 540 515 490 512 430 C 570 445 600 495 605 560 Z" fill="#061685" opacity="0.18"/>
-  <path d="M620 490 C 680 480 715 430 725 370 C 665 380 630 430 620 490 Z" fill="#0DC0B2" opacity="0.25"/>
-  <text x="600" y="790" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#061685" opacity="0.55" letter-spacing="3">PHOTO PLACEHOLDER</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 1200" width="960" height="1200">
+  <!-- PLACEHOLDER illustration in the logo palette. Replace with a real photo of the clinic. -->
+  <defs>
+    <linearGradient id="xc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E01993"/><stop offset="1" stop-color="#5B1BCA"/></linearGradient>
+    <linearGradient id="lc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0DC0B2"/><stop offset="1" stop-color="#077A71"/></linearGradient>
+    <radialGradient id="gc" cx="0.8" cy="0.15" r="0.9"><stop offset="0" stop-color="#DDF6F3"/><stop offset="1" stop-color="#F5F7FF"/></radialGradient>
+  </defs>
+  <rect width="960" height="1200" fill="url(#gc)"/>
+  <circle cx="760" cy="230" r="300" fill="#0DC0B2" fill-opacity="0.10"/>
+  <circle cx="150" cy="1050" r="330" fill="#5B1BCA" fill-opacity="0.06"/>
+  <g fill="#061685" fill-opacity="0.07"><circle cx="80" cy="80" r="2.4"/><circle cx="80" cy="120" r="2.4"/><circle cx="80" cy="160" r="2.4"/><circle cx="80" cy="200" r="2.4"/><circle cx="80" cy="240" r="2.4"/><circle cx="80" cy="280" r="2.4"/><circle cx="120" cy="80" r="2.4"/><circle cx="120" cy="120" r="2.4"/><circle cx="120" cy="160" r="2.4"/><circle cx="120" cy="200" r="2.4"/><circle cx="120" cy="240" r="2.4"/><circle cx="120" cy="280" r="2.4"/><circle cx="160" cy="80" r="2.4"/><circle cx="160" cy="120" r="2.4"/><circle cx="160" cy="160" r="2.4"/><circle cx="160" cy="200" r="2.4"/><circle cx="160" cy="240" r="2.4"/><circle cx="160" cy="280" r="2.4"/><circle cx="200" cy="80" r="2.4"/><circle cx="200" cy="120" r="2.4"/><circle cx="200" cy="160" r="2.4"/><circle cx="200" cy="200" r="2.4"/><circle cx="200" cy="240" r="2.4"/><circle cx="200" cy="280" r="2.4"/><circle cx="240" cy="80" r="2.4"/><circle cx="240" cy="120" r="2.4"/><circle cx="240" cy="160" r="2.4"/><circle cx="240" cy="200" r="2.4"/><circle cx="240" cy="240" r="2.4"/><circle cx="240" cy="280" r="2.4"/><circle cx="280" cy="80" r="2.4"/><circle cx="280" cy="120" r="2.4"/><circle cx="280" cy="160" r="2.4"/><circle cx="280" cy="200" r="2.4"/><circle cx="280" cy="240" r="2.4"/><circle cx="280" cy="280" r="2.4"/></g>
+  <circle cx="480" cy="610" r="290" fill="white" fill-opacity="0.7"/>
+  <circle cx="480" cy="610" r="290" fill="none" stroke="#061685" stroke-opacity="0.08" stroke-width="2"/>
+  <circle cx="480" cy="610" r="340" fill="none" stroke="#0DC0B2" stroke-opacity="0.25" stroke-width="1.5" stroke-dasharray="2 10"/>
+  <g transform="translate(470 360) scale(2.6)"><path d="M38 6h24a6 6 0 0 1 6 6v26h26a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6H68v26a6 6 0 0 1-6 6H38a6 6 0 0 1-6-6V68H6a6 6 0 0 1-6-6V38a6 6 0 0 1 6-6h26V12a6 6 0 0 1 6-6Z" fill="url(#xc)"/></g>
+  <g transform="translate(250 590) rotate(-8) scale(3.1)"><path d="M4 22C30 2 78 0 116 50 82 64 36 62 4 22Z" fill="url(#lc)"/><path d="M10 24C42 30 78 38 112 50" fill="none" stroke="white" stroke-opacity="0.6" stroke-width="2.5" stroke-linecap="round"/></g>
+  <g fill="none" stroke="#077A71" stroke-opacity="0.35" stroke-width="3" stroke-linecap="round">
+    <path d="M140 1010 C 160 900 200 840 270 800"/>
+    <path d="M178 905 C 135 880 120 840 128 800 C 168 822 182 862 178 905 Z" fill="#0DC0B2" fill-opacity="0.15"/>
+    <path d="M820 1010 C 800 930 770 880 715 850"/>
+    <path d="M790 930 C 830 915 850 880 846 845 C 810 860 793 893 790 930 Z" fill="#0DC0B2" fill-opacity="0.15"/>
+  </g>
+  <text x="480" y="1110" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="3" fill="#061685" fill-opacity="0.38">PHOTO PLACEHOLDER</text>
 </svg>

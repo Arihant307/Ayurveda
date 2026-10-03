@@ -6,7 +6,7 @@ import { getClinicHours, getVisibleTreatments } from "@/lib/db/queries";
 import { formatDayGroup, formatSessions } from "@/lib/format";
 import { Logo } from "./Logo";
 import { LEGAL_LINKS, NAV_LINKS } from "./nav";
-import { Wave } from "./Botanical";
+import { PlusMark, Wave } from "./Botanical";
 
 export async function Footer() {
   const [treatments, hours] = await Promise.all([getVisibleTreatments(), getClinicHours()]);
@@ -15,7 +15,9 @@ export async function Footer() {
   return (
     <footer className="mt-auto text-on-navy-muted">
       <Wave className="text-navy" />
-      <div className="bg-navy">
+      <div className="glow-navy relative overflow-hidden">
+        <PlusMark variant="outline" className="absolute -bottom-56 -right-48 size-[26rem] text-white/[0.05]" />
+        <div className="relative">
         <div className="container-site grid gap-10 pb-10 pt-8 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.3fr] lg:gap-8">
           <div>
             <Logo variant="onDark" className="h-20 w-auto" />
@@ -125,6 +127,7 @@ export async function Footer() {
             Information on this website is for general awareness only and is not a substitute for professional medical advice.
             Ayurvedic therapies are offered to support general wellbeing. Please consult a qualified doctor about any health concern.
           </p>
+        </div>
         </div>
       </div>
     </footer>

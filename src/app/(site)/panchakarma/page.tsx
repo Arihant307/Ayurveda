@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import { PageHero, Section, SectionHeading } from "@/components/site/Section";
 import { LinkButton } from "@/components/ui/Button";
 import { BookingCta } from "@/components/site/BookingCta";
-import { Mandala } from "@/components/site/Botanical";
+import { LogoLeaf, PlusMark } from "@/components/site/Botanical";
 import { PANCHAKARMA_THERAPIES } from "@/components/site/panchakarma";
 
 export const revalidate = 3600;
@@ -64,7 +64,11 @@ export default function PanchakarmaPage() {
       <PageHero eyebrow="Signature programme" title={<>Panchakarma in <span className="italic text-accent-gradient pr-1">Jaipur</span></>}
         aside={
           <div className="hidden justify-center md:flex" aria-hidden="true">
-            <Mandala className="size-72 text-teal opacity-60" />
+            <div className="relative size-72">
+              <div className="absolute inset-4 rounded-full bg-white/70 shadow-lift" />
+              <PlusMark id="pk-hero-plus" className="absolute right-10 top-10 size-36" />
+              <LogoLeaf className="absolute bottom-16 left-6 w-44 -rotate-6 text-teal" />
+            </div>
           </div>
         }>
         Panchakarma — “five actions” — is Ayurveda’s classical programme of cleansing and rejuvenation. At Kumar Ayurveda it

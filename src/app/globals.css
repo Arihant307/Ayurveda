@@ -34,9 +34,12 @@
   --brand-danger-soft: #fdecea;
 
   --gradient-accent: linear-gradient(90deg, var(--brand-magenta), var(--brand-violet));
+  /* The logo's cross, as a clip-path (arms 34% wide). */
+  --shape-plus: polygon(33% 0, 67% 0, 67% 33%, 100% 33%, 100% 67%, 67% 67%, 67% 100%, 33% 100%, 33% 67%, 0 67%, 0 33%, 33% 33%);
 
   --shadow-soft: 0 1px 2px rgb(6 22 133 / 0.04), 0 8px 24px -8px rgb(6 22 133 / 0.12);
   --shadow-lift: 0 2px 4px rgb(6 22 133 / 0.06), 0 18px 40px -12px rgb(6 22 133 / 0.2);
+  --shadow-navy: 0 12px 24px -12px rgb(6 22 133 / 0.6);
 }
 
 @theme inline {
@@ -72,6 +75,7 @@
 
   --shadow-soft: var(--shadow-soft);
   --shadow-lift: var(--shadow-lift);
+  --shadow-navy: var(--shadow-navy);
 
   --radius-card: 1.25rem;
 
@@ -152,6 +156,9 @@
   }
 
   .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
     font-family: var(--font-sans);
     font-size: 0.8125rem;
     font-weight: 700;
@@ -159,6 +166,74 @@
     text-transform: uppercase;
     color: var(--brand-teal-dark);
   }
+  /* Every eyebrow carries a tiny version of the logo's cross. */
+  .eyebrow::before {
+    content: "";
+    flex: none;
+    width: 0.7rem;
+    height: 0.7rem;
+    background: var(--gradient-accent);
+    clip-path: var(--shape-plus);
+    border-radius: 2px;
+  }
+
+  /* The logo's rounded cross as a shape: use with any background. */
+  .shape-plus { clip-path: var(--shape-plus); }
+
+  /* Soft glows in the logo colours (leaf teal, cross violet). Used for heroes. */
+  .glow-hero {
+    background-color: var(--brand-white);
+    background-image:
+      radial-gradient(55% 60% at 88% 8%, color-mix(in srgb, var(--brand-teal) 16%, transparent), transparent 70%),
+      radial-gradient(40% 45% at 0% 100%, color-mix(in srgb, var(--brand-violet) 7%, transparent), transparent 70%),
+      radial-gradient(30% 35% at 55% 0%, color-mix(in srgb, var(--brand-magenta) 5%, transparent), transparent 70%);
+  }
+  .glow-soft {
+    background-color: var(--brand-soft);
+    background-image:
+      radial-gradient(45% 55% at 100% 0%, color-mix(in srgb, var(--brand-teal) 12%, transparent), transparent 70%),
+      radial-gradient(40% 50% at 0% 100%, color-mix(in srgb, var(--brand-violet) 6%, transparent), transparent 70%);
+  }
+  /* Navy bands: navy at the top edge deepening to navy-dark at the bottom (so the wave
+     shapes above/below meet seamlessly), with the leaf's teal and the cross's violet glowing through. */
+  .glow-navy {
+    background-color: var(--brand-navy);
+    background-image:
+      radial-gradient(42% 50% at 100% 38%, color-mix(in srgb, var(--brand-teal) 20%, transparent), transparent 70%),
+      radial-gradient(38% 42% at 0% 62%, color-mix(in srgb, var(--brand-violet) 32%, transparent), transparent 70%),
+      linear-gradient(180deg, var(--brand-navy), var(--brand-navy-dark));
+  }
+
+  /* Faint dot grid (navy at 7%): adds texture behind hero art without noise. */
+  .dot-grid {
+    background-image: radial-gradient(color-mix(in srgb, var(--brand-navy) 9%, transparent) 1.2px, transparent 1.2px);
+    background-size: 18px 18px;
+  }
+
+  /* Gradient frame in the logo accent, e.g. around the hero image. */
+  .frame-accent {
+    padding: 3px;
+    background-image: linear-gradient(135deg, var(--brand-teal), var(--brand-violet) 55%, var(--brand-magenta));
+  }
+
+  /* Card with an accent bar that draws in on hover/focus. */
+  .card-accent { position: relative; }
+  .card-accent::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: var(--gradient-accent);
+    border-radius: inherit;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+    z-index: 1;
+  }
+  .card-accent:hover::before,
+  .card-accent:focus-within::before { transform: scaleX(1); }
 
   .prose-clinic p + p { margin-top: 1rem; }
   .prose-clinic h2 { font-size: 1.75rem; margin-top: 2.5rem; margin-bottom: 0.75rem; }
