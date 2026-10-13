@@ -1,0 +1,72 @@
+# ---------------------------------------------------------------------------
+# Configuration for the NIDS prototype.
+# Relative paths are resolved against the folder that contains this file.
+# ---------------------------------------------------------------------------
+
+seed: 42
+
+paths:
+  raw_dir: data/raw                 # put the 8 CIC-IDS2017 MachineLearningCSV files here
+  processed_dir: data/processed     # saved validation/test splits
+  output_dir: outputs               # metrics, reports
+  models_dir: outputs/models        # scaler, feature list, trained models
+  plots_dir: outputs/plots          # all PNG figures
+
+data:
+  label_column: Label               # name of the label column (after stripping spaces)
+  benign_label: BENIGN              # this value -> 0 (Normal); everything else -> 1 (Malicious)
+  sample_frac: 1.0                  # fraction of rows to keep (overridden by --sample-frac)
+
+preprocessing:
+  # What to do with rows that contain inf/-inf/NaN after inf -> NaN replacement:
+  #   drop   -> remove those rows (default)
+  #   impute -> keep them and fill with the TRAIN-set median of each column
+  invalid_values: drop
+  # Identifier-like / leakage-prone columns removed if present.
+  # (The MachineLearningCSV files usually do not contain them, but the
+  #  GeneratedLabelledFlows version of CIC-IDS2017 does.)
+  drop_columns:
+    - Flow ID
+    - Source IP
+    - Src IP
+    - Destination IP
+    - Dst IP
+    - Timestamp
+    - Source Port
+    - Src Port
+  scaler: standard                  # standard | minmax
+  split:
+    train: 0.70
+    val: 0.15
+    test: 0.15
+
+imbalance:
+  # class_weight -> weights computed from the training set (default)
+  # smote        -> oversample the TRAINING set only (class weights then switched off)
+  # none         -> do nothing
+  method: class_weight
+
+features:
+  drop_correlated: true             # drop one feature of each pair with |corr| > threshold
+  correlation_threshold: 0.95       # computed on the training set only
+
+models:
+  logistic_regression:
+    C: 1.0
+    max_iter: 1000
+  random_forest:
+    n_estimators: 100
+    max_depth: null                 # null = grow trees fully
+    min_samples_leaf: 1
+    n_jobs: -1                      # use all CPU cores
+  mlp:
+    hidden_units: [128, 64]         # one Dense layer per entry
+    activation: relu
+    dropout: 0.3                    # Dropout after every hidden layer
+    learning_rate: 0.001
+    batch_size: 256
+    epochs: 50
+    early_stopping_patience: 5
+
+evaluation:
+  threshold: 0.5                    # probability above which a flow is "Malicious"
