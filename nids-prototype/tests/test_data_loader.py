@@ -41,9 +41,9 @@ def test_stratified_sample_keeps_every_attack_type(loaded_flows):
 
 def test_load_dataset_merges_files_and_drops_empty_rows(tmp_path, raw_flows):
     raw_flows.iloc[:100].to_csv(tmp_path / "day1.csv", index=False)
-    second = pd.concat([raw_flows.iloc[100:], pd.DataFrame([[None] * raw_flows.shape[1]],
-                                                           columns=raw_flows.columns)])
-    second.to_csv(tmp_path / "day2.csv", index=False)
+    raw_flows.iloc[100:].to_csv(tmp_path / "day2.csv", index=False)
+    with open(tmp_path / "day2.csv", "a") as f:  # an empty trailing line, like the real files
+        f.write("," * (raw_flows.shape[1] - 1) + "\n")
 
     df, info = load_dataset(tmp_path)
     assert len(df) == len(raw_flows)
