@@ -19,6 +19,13 @@ class Settings(BaseSettings):
     environment: str = Field("development", description="development | test | production")
     app_name: str = "Hospital Security Operations Platform"
     database_url: str = f"sqlite:///{PROJECT_ROOT / 'backend' / 'hospital_security.db'}"
+    # Alternative to DATABASE_URL (used by docker-compose): the URL is built with the password
+    # URL-encoded, so characters such as @ : / # in POSTGRES_PASSWORD are safe.
+    postgres_host: str = ""
+    postgres_port: int = 5432
+    postgres_db: str = "hospital_security"
+    postgres_user: str = "hospital_security"
+    postgres_password: str = ""
 
     # Authentication
     jwt_secret: str = "dev-insecure-secret-change-me-before-production"
@@ -79,6 +86,12 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def _production_guard(self) -> "Settings":
+        if self.postgres_host:
+            from urllib.parse import quote
+
+            self.database_url = (f"postgresql+psycopg://{quote(self.postgres_user, safe='')}:"
+                                 f"{quote(self.postgres_password, safe='')}@{self.postgres_host}:"
+                                 f"{self.postgres_port}/{quote(self.postgres_db, safe='')}")
         if self.environment == "production":
             if self.jwt_secret in INSECURE_SECRETS or len(self.jwt_secret) < 32:
                 raise ValueError("JWT_SECRET must be set to a random value of at least 32 characters in production")
