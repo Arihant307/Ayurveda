@@ -1,0 +1,398 @@
+{
+  "metadata": {
+    "version": "20261022-145928",
+    "task": "binary: malicious/unsolicited e-mail (spam incl. phishing) vs legitimate",
+    "selected_model": "tfidf_complement_nb",
+    "threshold": 0.43501614048897497,
+    "threshold_policy": "lowest threshold with validation FPR <= 0.01",
+    "datasets": [
+      "Enron-Spam (enron1-6)"
+    ],
+    "dataset_files": {
+      "enron_spam/enron_spam_data.zip": "e994ad3c09fd7528b397e1f921742da5dd59f19695bc25cdb3617eb3ded17634"
+    },
+    "split": "source-based: train/val = enron1-4 (85/15 stratified), test = enron5+enron6",
+    "rows": {
+      "raw": 33716,
+      "deduplicated": 30138,
+      "train": 18203,
+      "val": 3213,
+      "test": 8722
+    },
+    "metrics": {
+      "validation": {
+        "threshold": 0.43501614048897497,
+        "n": 3213,
+        "positives": 1289,
+        "precision": 0.9852713178294573,
+        "recall": 0.9860356865787432,
+        "f1": 0.9856533540131834,
+        "false_positive_rate": 0.009875259875259876,
+        "false_negative_rate": 0.013964313421256789,
+        "roc_auc": 0.9993064616803948,
+        "pr_auc": 0.9988991865644834,
+        "brier": 0.008334321843437277,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              1905,
+              19
+            ],
+            [
+              18,
+              1271
+            ]
+          ]
+        }
+      },
+      "test": {
+        "threshold": 0.43501614048897497,
+        "n": 8722,
+        "positives": 5956,
+        "precision": 0.9874665775401069,
+        "recall": 0.9921087978509067,
+        "f1": 0.9897822445561139,
+        "false_positive_rate": 0.027114967462039046,
+        "false_negative_rate": 0.00789120214909335,
+        "roc_auc": 0.9985067647200221,
+        "pr_auc": 0.9992812104388356,
+        "brier": 0.011291353534721217,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              2691,
+              75
+            ],
+            [
+              47,
+              5909
+            ]
+          ]
+        }
+      },
+      "test_at_0.5": {
+        "threshold": 0.5,
+        "n": 8722,
+        "positives": 5956,
+        "precision": 0.9885944313988595,
+        "recall": 0.9895903290799194,
+        "f1": 0.9890921295519383,
+        "false_positive_rate": 0.024584237165582067,
+        "false_negative_rate": 0.010409670920080591,
+        "roc_auc": 0.9985067647200221,
+        "pr_auc": 0.9992812104388356,
+        "brier": 0.011291353534721217,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              2698,
+              68
+            ],
+            [
+              62,
+              5894
+            ]
+          ]
+        }
+      }
+    },
+    "latency": {
+      "n": 300,
+      "mean_ms": 2.0394698033320915,
+      "p50_ms": 1.6794020000361343,
+      "p95_ms": 4.04159270009359,
+      "p99_ms": 6.216227240131501
+    },
+    "limitations": [
+      "Enron-Spam labels spam vs ham; phishing is a subset of spam, so the score means 'malicious or unsolicited', not phishing specifically. Phishing-specific signals come from the rule indicators.",
+      "Training mail dates from 1999-2005; modern lures (QR codes, OAuth consent, MFA fatigue) are under-represented. Re-train on recent, locally labelled mail before production use.",
+      "Header features are not model inputs because the preprocessed corpus has no headers."
+    ],
+    "model_name": "email_classifier",
+    "trained_at": "2026-10-22T14:59:29.840109+00:00",
+    "python": "3.13.16",
+    "sklearn": "1.9.1",
+    "artifact_sha256": "fc613e965f6c0fe020f70c3e22a402c97fccc2b081564fa1c2464f2e3d0bb106"
+  },
+  "all_models": {
+    "tfidf_logreg": {
+      "validation": {
+        "threshold": 0.5318557246760085,
+        "n": 3213,
+        "positives": 1289,
+        "precision": 0.985373364126251,
+        "recall": 0.9930178432893716,
+        "f1": 0.9891808346213292,
+        "false_positive_rate": 0.009875259875259876,
+        "false_negative_rate": 0.0069821567106283944,
+        "roc_auc": 0.9992604946057234,
+        "pr_auc": 0.9988527097000411,
+        "brier": 0.0097201498663725,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              1905,
+              19
+            ],
+            [
+              9,
+              1280
+            ]
+          ]
+        }
+      },
+      "test": {
+        "threshold": 0.5318557246760085,
+        "n": 8722,
+        "positives": 5956,
+        "precision": 0.987813021702838,
+        "recall": 0.9934519811954332,
+        "f1": 0.9906244768123221,
+        "false_positive_rate": 0.02639190166305134,
+        "false_negative_rate": 0.006548018804566823,
+        "roc_auc": 0.9983209601187207,
+        "pr_auc": 0.9991062267642193,
+        "brier": 0.012043729721777372,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              2693,
+              73
+            ],
+            [
+              39,
+              5917
+            ]
+          ]
+        }
+      },
+      "test_at_0.5": {
+        "threshold": 0.5,
+        "n": 8722,
+        "positives": 5956,
+        "precision": 0.986839913376645,
+        "recall": 0.9946272666218939,
+        "f1": 0.990718287482231,
+        "false_positive_rate": 0.02856109906001446,
+        "false_negative_rate": 0.005372733378106112,
+        "roc_auc": 0.9983209601187207,
+        "pr_auc": 0.9991062267642193,
+        "brier": 0.012043729721777372,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              2687,
+              79
+            ],
+            [
+              32,
+              5924
+            ]
+          ]
+        }
+      }
+    },
+    "tfidf_linear_svm": {
+      "validation": {
+        "threshold": 0.33341536693426566,
+        "n": 3213,
+        "positives": 1289,
+        "precision": 0.985373364126251,
+        "recall": 0.9930178432893716,
+        "f1": 0.9891808346213292,
+        "false_positive_rate": 0.009875259875259876,
+        "false_negative_rate": 0.0069821567106283944,
+        "roc_auc": 0.9992608978256767,
+        "pr_auc": 0.9988397113831273,
+        "brier": 0.007490739077745177,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              1905,
+              19
+            ],
+            [
+              9,
+              1280
+            ]
+          ]
+        }
+      },
+      "test": {
+        "threshold": 0.33341536693426566,
+        "n": 8722,
+        "positives": 5956,
+        "precision": 0.9884827240861291,
+        "recall": 0.9942914707857623,
+        "f1": 0.9913785887670545,
+        "false_positive_rate": 0.024945770065075923,
+        "false_negative_rate": 0.005708529214237743,
+        "roc_auc": 0.9983898553237116,
+        "pr_auc": 0.999146394535104,
+        "brier": 0.009923034712288333,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              2697,
+              69
+            ],
+            [
+              34,
+              5922
+            ]
+          ]
+        }
+      },
+      "test_at_0.5": {
+        "threshold": 0.5,
+        "n": 8722,
+        "positives": 5956,
+        "precision": 0.9906040268456375,
+        "recall": 0.9912693082605776,
+        "f1": 0.9909365558912386,
+        "false_positive_rate": 0.02024584237165582,
+        "false_negative_rate": 0.008730691739422432,
+        "roc_auc": 0.9983898553237116,
+        "pr_auc": 0.999146394535104,
+        "brier": 0.009923034712288333,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              2710,
+              56
+            ],
+            [
+              52,
+              5904
+            ]
+          ]
+        }
+      }
+    },
+    "tfidf_complement_nb": {
+      "validation": {
+        "threshold": 0.43501614048897497,
+        "n": 3213,
+        "positives": 1289,
+        "precision": 0.9852713178294573,
+        "recall": 0.9860356865787432,
+        "f1": 0.9856533540131834,
+        "false_positive_rate": 0.009875259875259876,
+        "false_negative_rate": 0.013964313421256789,
+        "roc_auc": 0.9993064616803948,
+        "pr_auc": 0.9988991865644834,
+        "brier": 0.008334321843437277,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              1905,
+              19
+            ],
+            [
+              18,
+              1271
+            ]
+          ]
+        }
+      },
+      "test": {
+        "threshold": 0.43501614048897497,
+        "n": 8722,
+        "positives": 5956,
+        "precision": 0.9874665775401069,
+        "recall": 0.9921087978509067,
+        "f1": 0.9897822445561139,
+        "false_positive_rate": 0.027114967462039046,
+        "false_negative_rate": 0.00789120214909335,
+        "roc_auc": 0.9985067647200221,
+        "pr_auc": 0.9992812104388356,
+        "brier": 0.011291353534721217,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              2691,
+              75
+            ],
+            [
+              47,
+              5909
+            ]
+          ]
+        }
+      },
+      "test_at_0.5": {
+        "threshold": 0.5,
+        "n": 8722,
+        "positives": 5956,
+        "precision": 0.9885944313988595,
+        "recall": 0.9895903290799194,
+        "f1": 0.9890921295519383,
+        "false_positive_rate": 0.024584237165582067,
+        "false_negative_rate": 0.010409670920080591,
+        "roc_auc": 0.9985067647200221,
+        "pr_auc": 0.9992812104388356,
+        "brier": 0.011291353534721217,
+        "confusion_matrix": {
+          "labels": [
+            "negative",
+            "positive"
+          ],
+          "matrix": [
+            [
+              2698,
+              68
+            ],
+            [
+              62,
+              5894
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

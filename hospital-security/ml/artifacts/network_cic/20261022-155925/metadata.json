@@ -1,0 +1,548 @@
+{
+  "version": "20261022-155925",
+  "task": "multiclass network-flow classification (benign + 6 attack categories)",
+  "feature_set": "network_cic",
+  "features": [
+    "Dst Port",
+    "Protocol",
+    "Flow Duration",
+    "Tot Fwd Pkts",
+    "Tot Bwd Pkts",
+    "TotLen Fwd Pkts",
+    "TotLen Bwd Pkts",
+    "Fwd Pkt Len Max",
+    "Fwd Pkt Len Min",
+    "Fwd Pkt Len Mean",
+    "Fwd Pkt Len Std",
+    "Bwd Pkt Len Max",
+    "Bwd Pkt Len Min",
+    "Bwd Pkt Len Mean",
+    "Bwd Pkt Len Std",
+    "Flow Byts/s",
+    "Flow Pkts/s",
+    "Flow IAT Mean",
+    "Flow IAT Std",
+    "Flow IAT Max",
+    "Flow IAT Min",
+    "Fwd IAT Tot",
+    "Fwd IAT Mean",
+    "Fwd IAT Std",
+    "Fwd IAT Max",
+    "Fwd IAT Min",
+    "Bwd IAT Tot",
+    "Bwd IAT Mean",
+    "Bwd IAT Std",
+    "Bwd IAT Max",
+    "Bwd IAT Min",
+    "Fwd PSH Flags",
+    "Bwd PSH Flags",
+    "Fwd URG Flags",
+    "Bwd URG Flags",
+    "Fwd Header Len",
+    "Bwd Header Len",
+    "Fwd Pkts/s",
+    "Bwd Pkts/s",
+    "Pkt Len Min",
+    "Pkt Len Max",
+    "Pkt Len Mean",
+    "Pkt Len Std",
+    "Pkt Len Var",
+    "FIN Flag Cnt",
+    "SYN Flag Cnt",
+    "RST Flag Cnt",
+    "PSH Flag Cnt",
+    "ACK Flag Cnt",
+    "URG Flag Cnt",
+    "CWE Flag Count",
+    "ECE Flag Cnt",
+    "Down/Up Ratio",
+    "Pkt Size Avg",
+    "Fwd Seg Size Avg",
+    "Bwd Seg Size Avg",
+    "Fwd Byts/b Avg",
+    "Fwd Pkts/b Avg",
+    "Fwd Blk Rate Avg",
+    "Bwd Byts/b Avg",
+    "Bwd Pkts/b Avg",
+    "Bwd Blk Rate Avg",
+    "Subflow Fwd Pkts",
+    "Subflow Fwd Byts",
+    "Subflow Bwd Pkts",
+    "Subflow Bwd Byts",
+    "Init Fwd Win Byts",
+    "Init Bwd Win Byts",
+    "Fwd Act Data Pkts",
+    "Fwd Seg Size Min",
+    "Active Mean",
+    "Active Std",
+    "Active Max",
+    "Active Min",
+    "Idle Mean",
+    "Idle Std",
+    "Idle Max",
+    "Idle Min"
+  ],
+  "classes": [
+    "benign",
+    "brute_force",
+    "web_attack",
+    "dos",
+    "ddos",
+    "botnet",
+    "infiltration"
+  ],
+  "category_info": {
+    "benign": {
+      "title": "Benign traffic",
+      "mitre": "",
+      "severity": "info"
+    },
+    "brute_force": {
+      "title": "Credential brute force (FTP/SSH)",
+      "mitre": "T1110",
+      "severity": "high"
+    },
+    "web_attack": {
+      "title": "Web application attack (brute force, XSS, SQLi)",
+      "mitre": "T1190",
+      "severity": "high"
+    },
+    "dos": {
+      "title": "Denial of service",
+      "mitre": "T1499",
+      "severity": "high"
+    },
+    "ddos": {
+      "title": "Distributed denial of service",
+      "mitre": "T1498",
+      "severity": "critical"
+    },
+    "botnet": {
+      "title": "Botnet command-and-control",
+      "mitre": "T1071",
+      "severity": "critical"
+    },
+    "infiltration": {
+      "title": "Internal infiltration / lateral activity",
+      "mitre": "T1021",
+      "severity": "critical"
+    }
+  },
+  "selected_model": "xgboost",
+  "attack_threshold": 0.9202207922935486,
+  "threshold_policy": "lowest P(attack) threshold with validation benign FPR <= 0.01",
+  "datasets": [
+    "CSE-CIC-IDS2018 (CIC & CSE), processed CICFlowMeter CSVs from the official AWS bucket"
+  ],
+  "dataset_files": [
+    "Friday-02-03-2018",
+    "Friday-16-02-2018",
+    "Friday-23-02-2018",
+    "Thursday-15-02-2018",
+    "Thursday-22-02-2018",
+    "Wednesday-14-02-2018",
+    "Wednesday-21-02-2018",
+    "Wednesday-28-02-2018"
+  ],
+  "split": "time-ordered per (day, label): earliest 70% train, next 15% val, latest 15% test",
+  "rows": {
+    "train": 578520,
+    "val": 123969,
+    "test": 123974
+  },
+  "preparation_summary": "{\n  \"files\": {\n    \"Friday-02-03-2018_TrafficForML_CICFlowMeter.csv\": {\n      \"raw_rows\": 1048575,\n      \"after_clean\": 1044525,\n      \"after_dedup\": 819904,\n      \"conflicting_label_rows_dropped\": 0,\n      \"sampled_per_label\": {\n        \"Benign\": 60000,\n        \"Bot\": 60000\n      }\n    },\n    \"Friday-16-02-2018_TrafficForML_CICFlowMeter.csv\": {\n      \"raw_rows\": 1048575,\n      \"after_clean\": 1048574,\n      \"after_dedup\": 591901,\n      \"conflicting_label_rows_dropped\": 0,\n      \"sampled_per_label\": {\n        \"Benign\": 60000,\n        \"DoS attacks-Hulk\": 60000,\n        \"DoS attacks-SlowHTTPTest\": 55\n      }\n    },\n    \"Friday-23-02-2018_TrafficForML_CICFlowMeter.csv\": {\n      \"raw_rows\": 1048575,\n      \"after_clean\": 1042867,\n      \"after_dedup\": 905185,\n      \"conflicting_label_rows_dropped\": 8,\n      \"sampled_per_label\": {\n        \"Benign\": 60000,\n        \"Brute Force -Web\": 339,\n        \"Brute Force -XSS\": 150,\n        \"SQL Injection\": 48\n      }\n    },\n    \"Thursday-15-02-2018_TrafficForML_CICFlowMeter.csv\": {\n      \"raw_rows\": 1048575,\n      \"after_clean\": 1040548,\n      \"after_dedup\": 876946,\n      \"conflicting_label_rows_dropped\": 0,\n      \"sampled_per_label\": {\n        \"Benign\": 60000,\n        \"DoS attacks-GoldenEye\": 41406,\n        \"DoS attacks-Slowloris\": 9908\n      }\n    },\n    \"Thursday-22-02-2018_TrafficForML_CICFlowMeter.csv\": {\n      \"raw_rows\": 1048575,\n      \"after_clean\": 1042965,\n      \"after_dedup\": 901560,\n      \"conflicting_label_rows_dropped\": 6,\n      \"sampled_per_label\": {\n        \"Benign\": 60000,\n        \"Brute Force -Web\": 225,\n        \"Brute Force -XSS\": 79,\n        \"SQL Injection\": 31\n      }\n    },\n    \"Wednesday-14-02-2018_TrafficForML_CICFlowMeter.csv\": {\n      \"raw_rows\": 1048575,\n      \"after_clean\": 1044751,\n      \"after_dedup\": 671138,\n      \"conflicting_label_rows_dropped\": 14,\n      \"sampled_per_label\": {\n        \"Benign\": 60000,\n        \"FTP-BruteForce\": 46,\n        \"SSH-Bruteforce\": 60000\n      }\n    },\n    \"Wednesday-21-02-2018_TrafficForML_CICFlowMeter.csv\": {\n      \"raw_rows\": 1048575,\n      \"after_clean\": 1048575,\n      \"after_dedup\": 561405,\n      \"conflicting_label_rows_dropped\": 0,\n      \"sampled_per_label\": {\n        \"Benign\": 60000,\n        \"DDOS attack-HOIC\": 60000,\n        \"DDOS attack-LOIC-UDP\": 1730\n      }\n    },\n    \"Wednesday-28-02-2018_TrafficForML_CICFlowMeter.csv\": {\n      \"raw_rows\": 613104,\n      \"after_clean\": 606902,\n      \"after_dedup\": 513714,\n      \"conflicting_label_rows_dropped\": 17950,\n      \"sampled_per_label\": {\n        \"Benign\": 60000,\n        \"Infilteration\": 52446\n      }\n    }\n  },\n  \"seed\": 42,\n  \"benign_per_day\": 60000,\n  \"attack_cap\": 60000,\n  \"train_rows\": 578520,\n  \"train_categories\": {\n    \"benign\": 336000,\n    \"dos\": 77957,\n    \"ddos\": 43211,\n    \"brute_force\": 42032,\n    \"botnet\": 42000,\n    \"infiltration\": 36712,\n    \"web_attack\": 608\n  },\n  \"val_rows\": 123969,\n  \"val_categories\": {\n    \"benign\": 72000,\n    \"dos\": 16705,\n    \"ddos\": 9259,\n    \"brute_force\": 9007,\n    \"botnet\": 9000,\n    \"infiltration\": 7867,\n    \"web_attack\": 131\n  },\n  \"test_rows\": 123974,\n  \"test_categories\": {\n    \"benign\": 72000,\n    \"dos\": 16707,\n    \"ddos\": 9260,\n    \"brute_force\": 9007,\n    \"botnet\": 9000,\n    \"infiltration\": 7867,\n    \"web_attack\": 133\n  }\n}",
+  "metrics": {
+    "fit_seconds": 105.62295913696289,
+    "attack_threshold": 0.9202207922935486,
+    "validation": {
+      "n": 123969,
+      "per_class": {
+        "benign": {
+          "precision": 0.9094156672620567,
+          "recall": 0.99,
+          "f1-score": 0.9479984040430909,
+          "support": 72000.0
+        },
+        "brute_force": {
+          "precision": 0.9994448762073942,
+          "recall": 0.9994448762073942,
+          "f1-score": 0.9994448762073942,
+          "support": 9007.0
+        },
+        "web_attack": {
+          "precision": 0.8740157480314961,
+          "recall": 0.8473282442748091,
+          "f1-score": 0.8604651162790697,
+          "support": 131.0
+        },
+        "dos": {
+          "precision": 0.9997605363984674,
+          "recall": 0.9997006884166417,
+          "f1-score": 0.999730611511868,
+          "support": 16705.0
+        },
+        "ddos": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1-score": 1.0,
+          "support": 9259.0
+        },
+        "botnet": {
+          "precision": 1.0,
+          "recall": 0.9998888888888889,
+          "f1-score": 0.9999444413578532,
+          "support": 9000.0
+        },
+        "infiltration": {
+          "precision": 0.5284661754855995,
+          "recall": 0.10029236049319944,
+          "f1-score": 0.1685897435897436,
+          "support": 7867.0
+        }
+      },
+      "macro_f1": 0.85373902756986,
+      "weighted_f1": 0.916809052034638,
+      "confusion_matrix": {
+        "labels": [
+          "benign",
+          "brute_force",
+          "web_attack",
+          "dos",
+          "ddos",
+          "botnet",
+          "infiltration"
+        ],
+        "matrix": [
+          [
+            71280,
+            0,
+            16,
+            0,
+            0,
+            0,
+            704
+          ],
+          [
+            1,
+            9002,
+            0,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            20,
+            0,
+            111,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            5,
+            0,
+            16700,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            9259,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            8999,
+            0
+          ],
+          [
+            7078,
+            0,
+            0,
+            0,
+            0,
+            0,
+            789
+          ]
+        ]
+      },
+      "attack_vs_benign": {
+        "precision": 0.9842067165324969,
+        "recall": 0.8633800919779099,
+        "f1": 0.9198425551979336,
+        "false_positive_rate": 0.01,
+        "confusion_matrix": [
+          [
+            71280,
+            720
+          ],
+          [
+            7100,
+            44869
+          ]
+        ],
+        "roc_auc": 0.9829526806579136,
+        "pr_auc": 0.9807477666275576
+      }
+    },
+    "test": {
+      "n": 123974,
+      "per_class": {
+        "benign": {
+          "precision": 0.9112663287066004,
+          "recall": 0.9911666666666666,
+          "f1-score": 0.9495386293933326,
+          "support": 72000.0
+        },
+        "brute_force": {
+          "precision": 0.9993336294980009,
+          "recall": 0.9990007771733096,
+          "f1-score": 0.999167175614902,
+          "support": 9007.0
+        },
+        "web_attack": {
+          "precision": 0.8976377952755905,
+          "recall": 0.8571428571428571,
+          "f1-score": 0.8769230769230769,
+          "support": 133.0
+        },
+        "dos": {
+          "precision": 0.9996984318455971,
+          "recall": 0.9920991201292871,
+          "f1-score": 0.9958842791480157,
+          "support": 16707.0
+        },
+        "ddos": {
+          "precision": 1.0,
+          "recall": 0.9951403887688985,
+          "f1-score": 0.9975642760487144,
+          "support": 9260.0
+        },
+        "botnet": {
+          "precision": 0.9998889012331963,
+          "recall": 1.0,
+          "f1-score": 0.9999444475306928,
+          "support": 9000.0
+        },
+        "infiltration": {
+          "precision": 0.6418685121107266,
+          "recall": 0.14147705605694674,
+          "f1-score": 0.2318508488699094,
+          "support": 7867.0
+        }
+      },
+      "macro_f1": 0.8644103905040919,
+      "weighted_f1": 0.9210162238863546,
+      "confusion_matrix": {
+        "labels": [
+          "benign",
+          "brute_force",
+          "web_attack",
+          "dos",
+          "ddos",
+          "botnet",
+          "infiltration"
+        ],
+        "matrix": [
+          [
+            71364,
+            0,
+            13,
+            1,
+            0,
+            1,
+            621
+          ],
+          [
+            5,
+            8998,
+            0,
+            4,
+            0,
+            0,
+            0
+          ],
+          [
+            19,
+            0,
+            114,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            126,
+            6,
+            0,
+            16575,
+            0,
+            0,
+            0
+          ],
+          [
+            45,
+            0,
+            0,
+            0,
+            9215,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            9000,
+            0
+          ],
+          [
+            6754,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1113
+          ]
+        ]
+      },
+      "attack_vs_benign": {
+        "precision": 0.98607126431747,
+        "recall": 0.8662985338823258,
+        "f1": 0.9223126952424847,
+        "false_positive_rate": 0.008833333333333334,
+        "confusion_matrix": [
+          [
+            71364,
+            636
+          ],
+          [
+            6949,
+            45025
+          ]
+        ],
+        "roc_auc": 0.9828457984334047,
+        "pr_auc": 0.9808610394899864
+      }
+    }
+  },
+  "per_label_test": [
+    {
+      "label": "Benign",
+      "n": 72000,
+      "detected_rate": 0.9911666666666666,
+      "exact_category_rate": 0.9911666666666666
+    },
+    {
+      "label": "Bot",
+      "n": 9000,
+      "detected_rate": 1.0,
+      "exact_category_rate": 1.0
+    },
+    {
+      "label": "Brute Force -Web",
+      "n": 85,
+      "detected_rate": 0.8235294117647058,
+      "exact_category_rate": 0.8235294117647058
+    },
+    {
+      "label": "Brute Force -XSS",
+      "n": 35,
+      "detected_rate": 0.8857142857142857,
+      "exact_category_rate": 0.8857142857142857
+    },
+    {
+      "label": "DDOS attack-HOIC",
+      "n": 9000,
+      "detected_rate": 0.9956666666666667,
+      "exact_category_rate": 0.9956666666666667
+    },
+    {
+      "label": "DDOS attack-LOIC-UDP",
+      "n": 260,
+      "detected_rate": 0.9769230769230769,
+      "exact_category_rate": 0.9769230769230769
+    },
+    {
+      "label": "DoS attacks-GoldenEye",
+      "n": 6211,
+      "detected_rate": 1.0,
+      "exact_category_rate": 1.0
+    },
+    {
+      "label": "DoS attacks-Hulk",
+      "n": 9000,
+      "detected_rate": 1.0,
+      "exact_category_rate": 1.0
+    },
+    {
+      "label": "DoS attacks-SlowHTTPTest",
+      "n": 9,
+      "detected_rate": 0.8888888888888888,
+      "exact_category_rate": 0.2222222222222222
+    },
+    {
+      "label": "DoS attacks-Slowloris",
+      "n": 1487,
+      "detected_rate": 0.9159381304640215,
+      "exact_category_rate": 0.9159381304640215
+    },
+    {
+      "label": "FTP-BruteForce",
+      "n": 7,
+      "detected_rate": 1.0,
+      "exact_category_rate": 0.42857142857142855
+    },
+    {
+      "label": "Infilteration",
+      "n": 7867,
+      "detected_rate": 0.14147705605694674,
+      "exact_category_rate": 0.14147705605694674
+    },
+    {
+      "label": "SQL Injection",
+      "n": 13,
+      "detected_rate": 1.0,
+      "exact_category_rate": 1.0
+    },
+    {
+      "label": "SSH-Bruteforce",
+      "n": 9000,
+      "detected_rate": 0.9994444444444445,
+      "exact_category_rate": 0.9994444444444445
+    }
+  ],
+  "latency": {
+    "n": 300,
+    "mean_ms": 1.3501952699910664,
+    "p50_ms": 1.2854984997829888,
+    "p95_ms": 1.7440840503695656,
+    "p99_ms": 2.3643698702380767
+  },
+  "limitations": [
+    "Lab traffic from 2018 (CIC testbed). Hospital networks, medical-device protocols (DICOM, HL7, IoMT) and modern attacks are not represented.",
+    "The official CSVs are truncated at 1,048,575 rows per day, and heavy de-duplication leaves very few FTP brute-force (46) and SQL-injection flows; recall for those labels is unreliable.",
+    "Infiltration flows are largely indistinguishable from benign flows at the flow level (a known property of this dataset); expect low recall for that category.",
+    "Destination port is a strong feature; attacks on non-standard ports may be missed."
+  ],
+  "model_name": "network_cic",
+  "trained_at": "2026-10-22T15:59:26.042855+00:00",
+  "python": "3.13.16",
+  "sklearn": "1.9.1",
+  "artifact_sha256": "4f13558caab229880bf179aecdfbfa7f7ad4ad78b4f0c8599edd1ed48e544f43"
+}

@@ -1,0 +1,198 @@
+{
+  "version": "20261022-150306",
+  "task": "binary: phishing URL vs legitimate URL (lexical only, URL is never fetched)",
+  "selected_model": "char_ngram_logreg",
+  "calibration": "isotonic on validation split",
+  "threshold": 0.7777777777777779,
+  "threshold_policy": "lowest threshold with validation FPR <= 0.01",
+  "datasets": [
+    "Sahingoz et al. 2019 phishing URL dataset (PhishTank + Yandex)"
+  ],
+  "dataset_files": {
+    "data_phishing_37175.json": "c513d1f11b0ce159d43a23b465af2a65f752c6f65a816c2a8084f2a2adf2ebf6",
+    "data_legitimate_36400.json": "5e8fbcc88d6ba25f46bd85ed48d8aed9f56e2afc9deb712d13496112b8158ab4"
+  },
+  "split": "GroupShuffleSplit by registered domain: 70% train / 15% val / 15% test",
+  "rows": {
+    "raw": 73575,
+    "deduplicated": 51962,
+    "train": 36274,
+    "val": 7899,
+    "test": 7789
+  },
+  "metrics": {
+    "validation": {
+      "threshold": 0.7777777777777779,
+      "n": 7899,
+      "positives": 3435,
+      "precision": 0.9902022756005057,
+      "recall": 0.9120815138282388,
+      "f1": 0.9495378087589028,
+      "false_positive_rate": 0.006944444444444444,
+      "false_negative_rate": 0.08791848617176128,
+      "roc_auc": 0.9956425787669625,
+      "pr_auc": 0.9940589118961165,
+      "brier": 0.023109551495811932,
+      "confusion_matrix": {
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "matrix": [
+          [
+            4433,
+            31
+          ],
+          [
+            302,
+            3133
+          ]
+        ]
+      }
+    },
+    "test": {
+      "threshold": 0.7777777777777779,
+      "n": 7789,
+      "positives": 3568,
+      "precision": 0.9950647748303516,
+      "recall": 0.9041479820627802,
+      "f1": 0.9474302496328928,
+      "false_positive_rate": 0.0037905709547500594,
+      "false_negative_rate": 0.09585201793721973,
+      "roc_auc": 0.9946733939208505,
+      "pr_auc": 0.993788802171693,
+      "brier": 0.025338876524794305,
+      "confusion_matrix": {
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "matrix": [
+          [
+            4205,
+            16
+          ],
+          [
+            342,
+            3226
+          ]
+        ]
+      }
+    }
+  },
+  "metrics_by_url_shape": {
+    "host_only": {
+      "threshold": 0.7777777777777779,
+      "n": 289,
+      "positives": 88,
+      "precision": 1.0,
+      "recall": 0.3181818181818182,
+      "f1": 0.4827586206896552,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.6818181818181818,
+      "roc_auc": 0.8929500226142018,
+      "pr_auc": 0.7912451640639472,
+      "brier": 0.1416365543707726,
+      "confusion_matrix": {
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "matrix": [
+          [
+            201,
+            0
+          ],
+          [
+            60,
+            28
+          ]
+        ]
+      }
+    },
+    "with_path": {
+      "threshold": 0.7777777777777779,
+      "n": 7500,
+      "positives": 3480,
+      "precision": 0.9950217797137524,
+      "recall": 0.9189655172413793,
+      "f1": 0.9554825216611891,
+      "false_positive_rate": 0.003980099502487562,
+      "false_negative_rate": 0.08103448275862069,
+      "roc_auc": 0.996137738033968,
+      "pr_auc": 0.9955542090387631,
+      "brier": 0.02085753933846261,
+      "confusion_matrix": {
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "matrix": [
+          [
+            4004,
+            16
+          ],
+          [
+            282,
+            3198
+          ]
+        ]
+      }
+    }
+  },
+  "latency": {
+    "n": 300,
+    "mean_ms": 1.014169243322461,
+    "p50_ms": 0.9667984999168766,
+    "p95_ms": 1.399809750182613,
+    "p99_ms": 1.7489806401636079
+  },
+  "feature_names": [
+    "url_length",
+    "host_length",
+    "path_length",
+    "query_length",
+    "num_subdomains",
+    "num_dots",
+    "num_hyphens",
+    "num_underscores",
+    "num_slashes",
+    "num_digits",
+    "digit_ratio",
+    "num_special",
+    "has_at",
+    "has_ip_host",
+    "has_port",
+    "has_double_slash_path",
+    "num_params",
+    "num_hex_escapes",
+    "host_entropy",
+    "url_entropy",
+    "suspicious_tld",
+    "is_shortener",
+    "num_suspicious_tokens",
+    "brand_in_subdomain_or_path",
+    "brand_in_domain_not_registered",
+    "has_punycode",
+    "path_depth",
+    "longest_token",
+    "host_digit_count",
+    "host_hyphen_count",
+    "risky_extension",
+    "php_in_path",
+    "email_in_url",
+    "vowel_ratio_host",
+    "has_path",
+    "has_query"
+  ],
+  "limitations": [
+    "Collected in 2017-2018; phishing infrastructure changes quickly, so re-train on fresh feeds (PhishTank / OpenPhish / URLhaus exports) regularly.",
+    "Legitimate URLs come from search-engine results, which are biased toward popular, content-rich sites; internal hospital portals and vendor URLs may look unusual and score higher.",
+    "Lexical analysis cannot see page content, certificates or redirects by design."
+  ],
+  "model_name": "url_classifier",
+  "trained_at": "2026-10-22T15:03:09.687285+00:00",
+  "python": "3.13.16",
+  "sklearn": "1.9.1",
+  "artifact_sha256": "55980a3ff53d936907ef4ad38cdd7fd861b54a160cbae6a1e86747e12baec78b"
+}

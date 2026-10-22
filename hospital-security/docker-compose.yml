@@ -1,0 +1,58 @@
+# Local stack: PostgreSQL + FastAPI backend + Next.js dashboard.
+#   cp .env.example .env   # then set JWT_SECRET, POSTGRES_PASSWORD, BOOTSTRAP_ADMIN_PASSWORD
+#   docker compose up --build
+# Optional live telemetry (monitor only networks you are authorised to monitor):
+#   SURICATA_INTERFACE=eth0 docker compose --profile suricata up --build
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: hospital_security
+      POSTGRES_USER: hospital_security
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hospital_security -d hospital_security"]
+      interval: 5s
+      retries: 20
+    restart: unless-stopped
+
+  backend:
+    build: { context: ., dockerfile: backend/Dockerfile, secrets: [extra_ca] }
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://hospital_security:${POSTGRES_PASSWORD}@db:5432/hospital_security
+      SURICATA_EVE_PATH: ${SURICATA_EVE_PATH:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+    volumes:
+      - suricata-logs:/var/log/suricata:ro
+    depends_on:
+      db: { condition: service_healthy }
+    ports: ["127.0.0.1:8000:8000"]
+    restart: unless-stopped
+
+  frontend:
+    build: { context: frontend, args: { BACKEND_URL: http://backend:8000 }, secrets: [extra_ca] }
+    environment:
+      BACKEND_URL: http://backend:8000
+    depends_on: [backend]
+    ports: ["127.0.0.1:3000:3000"]
+    restart: unless-stopped
+
+  suricata:
+    profiles: ["suricata"]
+    image: jasonish/suricata:7.0
+    network_mode: host
+    cap_add: [NET_ADMIN, NET_RAW, SYS_NICE]
+    command: ["-i", "${SURICATA_INTERFACE:-eth0}"]
+    volumes:
+      - suricata-logs:/var/log/suricata
+
+secrets:
+  # Optional CA bundle for TLS-inspecting proxies during image builds; empty by default.
+  extra_ca:
+    file: ${EXTRA_CA_CERT:-/dev/null}
+
+volumes:
+  pgdata:
+  suricata-logs:

@@ -1,0 +1,21 @@
+# Versions used for the reported training runs and test results.
+fastapi==0.159.1
+starlette==1.7.0
+uvicorn[standard]==0.54.0
+pydantic==2.13.5
+pydantic-settings==2.16.1
+SQLAlchemy==2.1.6
+alembic==1.20.1
+psycopg[binary]==3.3.6
+python-multipart==0.0.32
+bcrypt==5.0.0
+PyJWT==2.15.0
+httpx==0.28.1
+numpy==2.5.3
+pandas==3.0.5
+pyarrow==26.0.0
+scipy==1.18.1
+scikit-learn==1.9.1
+xgboost==3.4.1
+joblib==1.6.0
+tldextract==5.4.0

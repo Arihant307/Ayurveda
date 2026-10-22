@@ -1,0 +1,40 @@
+%YAML 1.1
+---
+vars:
+  address-groups:
+    HOME_NET: "[127.0.0.0/8,10.0.0.0/8,172.16.0.0/12,192.168.0.0/16]"
+    EXTERNAL_NET: "any"
+  port-groups:
+    HTTP_PORTS: "[80,8000,8080]"
+default-log-dir: /var/log/suricata
+default-rule-path: /etc/suricata/rules-local
+rule-files: [local.rules]
+classification-file: /etc/suricata/classification.config
+reference-config-file: /etc/suricata/reference.config
+outputs:
+  - eve-log:
+      enabled: yes
+      filetype: regular
+      filename: eve.json
+      types: [alert, http, dns, tls, flow]
+app-layer:
+  protocols:
+    http: {enabled: yes, libhtp: {default-config: {personality: IDS}}}
+    tls: {enabled: yes}
+    dns: {tcp: {enabled: yes}, udp: {enabled: yes}}
+flow:
+  timeouts: {default: {new: 5, established: 10, closed: 2}, tcp: {new: 5, established: 10, closed: 2}, udp: {new: 5, established: 10}}
+af-packet:
+  - interface: lo
+    cluster-id: 99
+    cluster-type: cluster_flow
+    defrag: yes
+pcap:
+  - interface: lo
+    checksum-checks: no
+stream:
+  checksum-validation: no
+unix-command: {enabled: no}
+logging:
+  outputs:
+    - file: {enabled: yes, filename: /var/log/suricata/suricata.log}

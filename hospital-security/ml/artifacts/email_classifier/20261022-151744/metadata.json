@@ -1,0 +1,127 @@
+{
+  "version": "20261022-151744",
+  "task": "binary: malicious/unsolicited e-mail (spam incl. phishing) vs legitimate",
+  "selected_model": "tfidf_complement_nb",
+  "threshold": 0.43501614048897497,
+  "threshold_policy": "lowest threshold with validation FPR <= 0.01",
+  "datasets": [
+    "Enron-Spam (enron1-6)"
+  ],
+  "dataset_files": {
+    "enron_spam/enron_spam_data.zip": "e994ad3c09fd7528b397e1f921742da5dd59f19695bc25cdb3617eb3ded17634"
+  },
+  "split": "source-based: train/val = enron1-4 (85/15 stratified), test = enron5+enron6",
+  "rows": {
+    "raw": 33716,
+    "deduplicated": 30138,
+    "train": 18203,
+    "val": 3213,
+    "test": 8722
+  },
+  "metrics": {
+    "validation": {
+      "threshold": 0.43501614048897497,
+      "n": 3213,
+      "positives": 1289,
+      "precision": 0.9852713178294573,
+      "recall": 0.9860356865787432,
+      "f1": 0.9856533540131834,
+      "false_positive_rate": 0.009875259875259876,
+      "false_negative_rate": 0.013964313421256789,
+      "roc_auc": 0.9993064616803948,
+      "pr_auc": 0.9988991865644834,
+      "brier": 0.008334321843437277,
+      "confusion_matrix": {
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "matrix": [
+          [
+            1905,
+            19
+          ],
+          [
+            18,
+            1271
+          ]
+        ]
+      }
+    },
+    "test": {
+      "threshold": 0.43501614048897497,
+      "n": 8722,
+      "positives": 5956,
+      "precision": 0.9874665775401069,
+      "recall": 0.9921087978509067,
+      "f1": 0.9897822445561139,
+      "false_positive_rate": 0.027114967462039046,
+      "false_negative_rate": 0.00789120214909335,
+      "roc_auc": 0.9985067647200221,
+      "pr_auc": 0.9992812104388356,
+      "brier": 0.011291353534721217,
+      "confusion_matrix": {
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "matrix": [
+          [
+            2691,
+            75
+          ],
+          [
+            47,
+            5909
+          ]
+        ]
+      }
+    },
+    "test_at_0.5": {
+      "threshold": 0.5,
+      "n": 8722,
+      "positives": 5956,
+      "precision": 0.9885944313988595,
+      "recall": 0.9895903290799194,
+      "f1": 0.9890921295519383,
+      "false_positive_rate": 0.024584237165582067,
+      "false_negative_rate": 0.010409670920080591,
+      "roc_auc": 0.9985067647200221,
+      "pr_auc": 0.9992812104388356,
+      "brier": 0.011291353534721217,
+      "confusion_matrix": {
+        "labels": [
+          "negative",
+          "positive"
+        ],
+        "matrix": [
+          [
+            2698,
+            68
+          ],
+          [
+            62,
+            5894
+          ]
+        ]
+      }
+    }
+  },
+  "latency": {
+    "n": 300,
+    "mean_ms": 2.1128353600003416,
+    "p50_ms": 1.7862284998955147,
+    "p95_ms": 3.7865435000639995,
+    "p99_ms": 5.849482680105208
+  },
+  "limitations": [
+    "Enron-Spam labels spam vs ham; phishing is a subset of spam, so the score means 'malicious or unsolicited', not phishing specifically. Phishing-specific signals come from the rule indicators.",
+    "Training mail dates from 1999-2005; modern lures (QR codes, OAuth consent, MFA fatigue) are under-represented. Re-train on recent, locally labelled mail before production use.",
+    "Header features are not model inputs because the preprocessed corpus has no headers."
+  ],
+  "model_name": "email_classifier",
+  "trained_at": "2026-10-22T15:17:46.743643+00:00",
+  "python": "3.13.16",
+  "sklearn": "1.9.1",
+  "artifact_sha256": "14b79d5a72f072f57c9b23383c42c21a2b59ddba53aecf8d27e8c2d1d27c469e"
+}

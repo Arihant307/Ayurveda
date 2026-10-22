@@ -1,0 +1,20 @@
+# Secrets and local config
+.env
+.build-ca.crt
+
+# Datasets (downloaded by ml/data/download.py) and derived splits
+ml/data/raw/
+ml/data/processed/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+backend/*.db
+backend/*.db-*
+
+# Frontend
+frontend/node_modules/
+frontend/.next/
+frontend/next-env.d.ts
+frontend/*.tsbuildinfo

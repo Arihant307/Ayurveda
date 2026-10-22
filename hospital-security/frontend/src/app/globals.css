@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* Hospital SOC palette — light, green/teal led, no black or blue. */
+@theme {
+  --color-primary: #16866a;
+  --color-primary-strong: #0f6b54;
+  --color-primary-soft: #e3f2ec;
+  --color-secondary: #36a58a;
+  --color-canvas: #f7f8f2;
+  --color-card: #ffffff;
+  --color-ink: #34443d;
+  --color-ink-soft: #5c6b64;
+  --color-ink-muted: #7d8a83;
+  --color-line: #dce6dc;
+  --color-line-soft: #ebf1ea;
+  --color-critical: #d64545;
+  --color-critical-soft: #fbe9e9;
+  --color-high: #e98a36;
+  --color-high-soft: #fdf0e3;
+  --color-medium: #e7bc45;
+  --color-medium-soft: #fcf5de;
+  --color-medium-ink: #8a6a10;
+  --color-safe: #299764;
+  --color-safe-soft: #e4f4ec;
+  --color-info: #7d8a83;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --shadow-card: 0 1px 2px rgb(52 68 61 / 0.06), 0 4px 16px rgb(52 68 61 / 0.05);
+}
+
+html,
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}

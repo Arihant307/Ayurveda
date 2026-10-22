@@ -1,5 +1,7 @@
 # Kumar Ayurveda — Clinic Website & Online Booking
 
+> **Also in this repository:** [`hospital-security/`](hospital-security/README.md) contains a separate project, the CareShield hospital cybersecurity and phishing-detection platform (FastAPI + ML + Next.js). It has its own README, dependencies and Docker setup.
+
 The website, online booking and admin dashboard for **Kumar Ayurveda**, an Ayurveda & Panchakarma clinic at S-8, JDA Central Market, Amrapali Circle, Vaishali Nagar, Jaipur.
 
 - **Public site:** Home, About, Doctors, Treatments, Panchakarma, Contact, plus the Privacy, Terms and Medical Disclaimer pages

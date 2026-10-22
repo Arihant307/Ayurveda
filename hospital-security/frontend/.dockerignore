@@ -1,0 +1,10 @@
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/node_modules
+**/.next
+ml/data/raw
+ml/data/processed
+backend/*.db*
+.env
+.build-ca.crt
